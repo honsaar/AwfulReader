@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+    <div v-html="dom"></div>
+    </b-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  name: "home",
+  components: {},
+  data: function(){
+    return {
+      dom: ''
+    }
+  },
+  mounted: function() {
+    console.log("Hello World.");
+    var vueInstance = this;
+    var testing = axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://lparchive.org/Dangan-Ronpa/"
+      )
+      .then(function(e) {
+        var dataDom = e.data;
+        console.log(dataDom)
+        var doc = new DOMParser().parseFromString(dataDom, "text/html");
+        vueInstance.dom = doc.getElementById('content').innerHTML;
+
+      });
   }
-}
+};
 </script>
