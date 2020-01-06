@@ -51,10 +51,13 @@ export default {
         var content = doc.getElementById('content');
         console.log("content", content);   
         
+        
         //navigation
         var nav = doc.getElementById('nav_bottom');
         console.log(nav);
+
         //fix the links
+        //TODO: change this so the absolute path is created - the current implementation doesn't work on mobile
         nav.children.forEach(element => {
 
           if(element.className == "return"){
@@ -86,6 +89,7 @@ export default {
         }
 
         //check to see if the current LP exists
+        //TODO: Update the name to be more screen friendly, and to prevent the titles doubling up in the localStorage. Get it from the home page?
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];

@@ -54,8 +54,9 @@ export default {
     this.reading = JSON.parse(localStorage.readingList);
     }
 
+
     //make API calls for each game to a video game API?
-    
+    //use https://api.rawg.io/api/games?search=gta%20v as an API    
   }
 };
 </script>
