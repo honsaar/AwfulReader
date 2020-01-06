@@ -78,18 +78,23 @@ export default {
 
         vueInstance.dom = "<div>" + content.outerHTML + nav.outerHTML + "</div>";
 
+        //LOCAL STORAGE BIZ
+
+        //fix name to remove any dashes in the LP url
+        lp = lp.replace(/-/g, ' ');
 
         //add this to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
         if(localStorage.readingList == undefined || localStorage.readingList.length == 0){
         var readingList = [];
-
+      
         readingList.push({"title": lp, "part": update});
         } else {
         var readingList = JSON.parse(localStorage.readingList);
         }
 
+        
+
         //check to see if the current LP exists
-        //TODO: Update the name to be more screen friendly, and to prevent the titles doubling up in the localStorage. Get it from the home page?
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
