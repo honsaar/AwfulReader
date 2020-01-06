@@ -53,6 +53,53 @@ export default {
         });
 
         vueInstance.dom = content.outerHTML;
+
+
+        //add this to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
+        if(localStorage.readingList == undefined || localStorage.readingList.length == 0){
+        var readingList = [];
+        console.log("reading empty");
+        readingList.push({"title": lp, "part": update});
+        } else {
+        var readingList = JSON.parse(localStorage.readingList);
+        }
+        console.log("1", readingList);
+
+        //check to see if the current LP exists
+        var found = false;
+        for(var i = 0; i < readingList.length; i++){
+          var element = readingList[i];
+          console.log(element);
+          if(element.title == lp){
+            //if the lp exists
+            console.log("LP exists");
+            if(element.part == update){
+              //if the lp and the part exists
+              console.log("Current Part!");
+              found = true;
+              break;
+
+            } else {
+              console.log("updating part");
+              element.part = update;
+              found = true;
+              break;
+            }
+          }
+        }
+
+        if(!found){
+            console.log("not found");
+            //else push everything
+            readingList.push({"title": lp, "part": update});
+          
+        }
+        console.log("local", readingList);
+        
+        //send it to LocalStorage
+        localStorage.readingList = JSON.stringify(readingList);
+        console.log(JSON.parse(localStorage.readingList));
+        
   });
 
   }

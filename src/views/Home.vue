@@ -2,6 +2,14 @@
   <div class="home">
 
     <b-container>
+
+      <p>Currently Reading</p>
+      <ul>
+        <li v-for="(reading, index) in reading" v-bind:key="index">
+          <p><router-link :to="'lp/' + reading.title +'/' + reading.part"> {{reading.title}} | {{reading.part}}</router-link></p>
+          </li>
+          </ul>
+          <br><br><br>
       <div class="lp-list">
         <ul>
           <li v-for="(lp, index) in LPList" v-bind:key="index">
@@ -23,10 +31,12 @@ export default {
   name: "LetsRead",
   data: function() {
     return {
-      LPList: []
+      LPList: [],
+      reading: []
     };
   },
   mounted: function() {
+    document.title = "Let's Read!";
     var list = LPLIST;
     list.sort(function(a, b) {
       if (a.t < b.t) return -1;
@@ -36,6 +46,12 @@ export default {
     });
     this.LPList = list;
     console.log(list);
+
+    //get reading list
+    if(localStorage.readingList){
+    console.log(JSON.parse(localStorage.readingList));
+    this.reading = JSON.parse(localStorage.readingList);
+    }
   }
 };
 </script>
