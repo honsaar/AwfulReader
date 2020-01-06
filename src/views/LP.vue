@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <b-container>
+  <div class="lp">
+     <b-container>
     <!-- <div v-html="dom" ref="dom"></div> -->
 
       <!-- <component :is="{template: dom, ref:}"></component> -->
@@ -12,12 +12,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import VRuntimeTemplate from "v-runtime-template";
-
 export default {
-  name: "home",
-  components: {
+  name: "LP",
+   components: {
     VRuntimeTemplate
   },
   data: function(){
@@ -26,32 +24,46 @@ export default {
     }
   },
   mounted: function() {
-    console.log("Hello World.");
+    console.log(this);
+    console.log("Route", this.$route);
+    var LPName = this.$route.params.name;
+    var LPSrc = LPName.replace(/\s+/g, '-');
     var vueInstance = this;
     var testing = axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://lparchive.org/Dangan-Ronpa/"
+        "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/"
       )
       .then(function(e) {
         var dataDom = e.data;
         // console.log(e);
-        console.log("returned", dataDom)
         var doc = new DOMParser().parseFromString(dataDom, "text/html");
         console.log("parsed", doc);
+        document.title = doc.title;
         var content = doc.getElementById('content');
         console.log("content", content);        
         var HTMLmassage = content.outerHTML;
 
         //adjust the returned content and turn it into Vue syntax for links
-        HTMLmassage = content.getElementsByTagName('a');
+        HTMLmassage = content.getElementsByClassName('toc');
         HTMLmassage.forEach(element => {
-          //only do this if it's in a list -- normal links can remain as-is
-          if(element.parentNode.tagName == "LI"){
-          element.outerHTML = "<router-link to='" + element.attributes.href.value + "' >" + element.innerText + "</router-link>";
-          }
+          
+          element.children.forEach(e => {
+            if(e.firstChild.attributes != undefined){
+            e.innerHTML = "<router-link to='" + vueInstance.$route.path + "/" + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
+            }
+          })
+          
         });
 
-        // fix the images?
+    
+
+        // fix the images
+        var image = content.getElementsByTagName('img');
+        // image.getElementsByTagName('img');
+        console.log(image);
+        image.forEach(element => {
+           element.src="https://lparchive.org/" + LPSrc + "/" + element.attributes.src.value;
+        });
 
 
 
@@ -60,9 +72,10 @@ export default {
         
 
       });
-  },
-  methods: {
-   
   }
-};
+}
 </script>
+
+<style>
+
+</style>
