@@ -55,8 +55,7 @@ export default {
           
         });
 
-    
-
+  
         // fix the images
         var image = content.getElementsByTagName('img');
         // image.getElementsByTagName('img');

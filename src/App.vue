@@ -36,4 +36,8 @@ export default {
 li {
   list-style-type: none;
 }
+
+img {
+  max-width: 100%;
+}
 </style>
