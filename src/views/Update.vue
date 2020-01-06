@@ -31,7 +31,6 @@ export default {
     var LPSrc = lp.replace(/\s+/g, '-');
     var UpdateSrc = update.replace(/\s+/g, '%20');
     var remoteURL = "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/";
-    console.log(remoteURL);
     var vueInstance = this;
 
     var testing = axios

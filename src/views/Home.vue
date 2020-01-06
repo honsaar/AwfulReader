@@ -1,68 +1,41 @@
 <template>
   <div class="home">
+
     <b-container>
-    <!-- <div v-html="dom" ref="dom"></div> -->
-
-      <!-- <component :is="{template: dom, ref:}"></component> -->
-
-    <v-runtime-template :template="dom" ref="dom"></v-runtime-template>
-
+      <div class="lp-list">
+        <ul>
+          <li v-for="(lp, index) in LPList" v-bind:key="index">
+           <router-link :to="'lp' + lp.u"> {{lp.t}} </router-link>
+            </li>
+        </ul>
+      </div>
     </b-container>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import VRuntimeTemplate from "v-runtime-template";
+
+import LPLIST from "../assets/tocdata.json";
 
 export default {
-  name: "home",
-  components: {
-    VRuntimeTemplate
-  },
-  data: function(){
+  name: "LetsRead",
+  data: function() {
     return {
-      dom: '',
-    }
+      LPList: []
+    };
   },
   mounted: function() {
-    console.log("Hello World.");
-    var vueInstance = this;
-    var testing = axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://lparchive.org/Dangan-Ronpa/"
-      )
-      .then(function(e) {
-        var dataDom = e.data;
-        // console.log(e);
-        console.log("returned", dataDom)
-        var doc = new DOMParser().parseFromString(dataDom, "text/html");
-        console.log("parsed", doc);
-        var content = doc.getElementById('content');
-        console.log("content", content);        
-        var HTMLmassage = content.outerHTML;
+    var list = LPLIST;
+    list.sort(function(a, b) {
+      if (a.t < b.t) return -1;
+      if (a.t > b.t) return 1;
 
-        //adjust the returned content and turn it into Vue syntax for links
-        HTMLmassage = content.getElementsByTagName('a');
-        HTMLmassage.forEach(element => {
-          //only do this if it's in a list -- normal links can remain as-is
-          if(element.parentNode.tagName == "LI"){
-          element.outerHTML = "<router-link to='" + element.attributes.href.value + "' >" + element.innerText + "</router-link>";
-          }
-        });
-
-        // fix the images?
-
-
-
-
-        vueInstance.dom = content.outerHTML;
-        
-
-      });
-  },
-  methods: {
-   
+      return 0;
+    });
+    this.LPList = list;
+    console.log(list);
   }
 };
 </script>
