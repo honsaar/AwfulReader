@@ -1,7 +1,10 @@
 <template>
   <div class="update">
     <b-container>
-    <v-runtime-template :template="dom" ref="dom"></v-runtime-template>
+    <v-runtime-template :key="$route.fullPath" :template="dom" ref="dom"></v-runtime-template>
+    <div id="nav">
+
+    </div>
     </b-container>
   </div>
 </template>
@@ -32,6 +35,7 @@ export default {
     var UpdateSrc = update.replace(/\s+/g, '%20');
     var remoteURL = "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/";
     var vueInstance = this;
+    this.dom = '';
 
     var testing = axios
       .get(
@@ -43,44 +47,56 @@ export default {
         var doc = new DOMParser().parseFromString(dataDom, "text/html");
         console.log("parsed", doc);
         document.title = doc.title;
+        //update content
         var content = doc.getElementById('content');
-        console.log("content", content);        
+        console.log("content", content);   
+        
+        //navigation
+        var nav = doc.getElementById('nav_bottom');
+        console.log(nav);
+        //fix the links
+        nav.children.forEach(element => {
+
+          if(element.className == "return"){
+            element.innerHTML = "<router-link to='../'>" + element.innerText + "</router-link>";
+          } else {
+          element.innerHTML = "<router-link to='" + element.attributes.href.textContent + "'>" + element.innerText + "</router-link>";
+          }
+        });
+
+        
+        //fix the images
         var image = content.getElementsByTagName('img');
         // image.getElementsByTagName('img');
-        console.log(image);
+  
         image.forEach(element => {
            element.src="https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/" + element.attributes.src.value;
         });
 
-        vueInstance.dom = content.outerHTML;
+        vueInstance.dom = "<div>" + content.outerHTML + nav.outerHTML + "</div>";
 
 
         //add this to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
         if(localStorage.readingList == undefined || localStorage.readingList.length == 0){
         var readingList = [];
-        console.log("reading empty");
+
         readingList.push({"title": lp, "part": update});
         } else {
         var readingList = JSON.parse(localStorage.readingList);
         }
-        console.log("1", readingList);
 
         //check to see if the current LP exists
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
-          console.log(element);
           if(element.title == lp){
             //if the lp exists
-            console.log("LP exists");
             if(element.part == update){
               //if the lp and the part exists
-              console.log("Current Part!");
               found = true;
               break;
 
             } else {
-              console.log("updating part");
               element.part = update;
               found = true;
               break;
@@ -89,16 +105,14 @@ export default {
         }
 
         if(!found){
-            console.log("not found");
             //else push everything
             readingList.push({"title": lp, "part": update});
           
         }
-        console.log("local", readingList);
         
         //send it to LocalStorage
         localStorage.readingList = JSON.stringify(readingList);
-        console.log(JSON.parse(localStorage.readingList));
+
         
   });
 

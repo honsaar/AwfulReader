@@ -10,13 +10,14 @@
           </li>
           </ul>
           <br><br><br>
-      <div class="lp-list">
+
+      <!-- <div class="lp-list">
         <ul>
           <li v-for="(lp, index) in LPList" v-bind:key="index">
            <router-link :to="'lp' + lp.u"> {{lp.t}} </router-link>
             </li>
         </ul>
-      </div>
+      </div> -->
     </b-container>
 
   </div>
@@ -52,6 +53,9 @@ export default {
     console.log(JSON.parse(localStorage.readingList));
     this.reading = JSON.parse(localStorage.readingList);
     }
+
+    //make API calls for each game to a video game API?
+    
   }
 };
 </script>
