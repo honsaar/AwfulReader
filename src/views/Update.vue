@@ -86,11 +86,6 @@ export default {
         //fix name to remove any dashes in the LP url
         lp = lp.replace(/-/g, ' ');
 
-        //TODO: grab images from the API and save them in localStorage?
-        //TODO: Figure out how to get the total number of updates and save them in localStorage, use for comparing the current reading progress. -- One option is to do all this on the first page of a game instead of the first update. First update will just find the current game and keep the localStorage up to date.
-        //use https://api.rawg.io/api/games?search=gta%20v as an API   
-
-
         //add LP Update to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
         console.log(localStorage);
         var readingList = JSON.parse(localStorage.readingList);
@@ -99,12 +94,16 @@ export default {
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
+          console.log(element);
           if(element.title == lp){
             //if the lp exists
             if(element.part){
               //if the lp and the part exists
               if (element.part != update){
                 element.part = update;
+                //new update, move this to the top of the list
+                readingList.splice(i, 1);
+                readingList.unshift(element);
               }
               found = true;
               break;

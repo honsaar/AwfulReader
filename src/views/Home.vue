@@ -40,8 +40,8 @@ export default {
     document.title = "Let's Read!";
     var list = LPLIST;
     list.sort(function(a, b) {
-      if (a.t < b.t) return -1;
-      if (a.t > b.t) return 1;
+      if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
+      if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
 
       return 0;
     });
@@ -53,7 +53,8 @@ export default {
     console.log(JSON.parse(localStorage.readingList));
     this.reading = JSON.parse(localStorage.readingList);
     }
-
+    //TODO: grab images from the API and save them
+        //use https://api.rawg.io/api/games?search=gta%20v as an API
      
   }
 };

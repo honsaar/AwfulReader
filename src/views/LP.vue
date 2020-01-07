@@ -75,12 +75,17 @@ export default {
           
         });
         } else {
-
+          //TODO: How to handle any other ways of displaying updates?
+          //TODO: Get the href and if it contains the word "update" change it to a router-link?
         }
         console.log(upNum);
   
         // fix the images
         var image = content.getElementsByTagName('img');
+        //TODO: fix direct links to images
+        //TODO: check the <a> tags, and if the href ends in .png/whatever, then change it to an absolute link just like embedded images
+
+
         // image.getElementsByTagName('img');
         image.forEach(element => {
            element.src="https://lparchive.org/" + LPSrc + "/" + element.attributes.src.value;
@@ -138,7 +143,7 @@ export default {
 
         if(!found){
             //else push everything
-            readingList.push({"title": lp, "part": "Index", "total":upNum});
+            readingList.unshift({"title": lp, "part": "Index", "total":upNum});
           
         }
         localStorage.readingList = JSON.stringify(readingList);
