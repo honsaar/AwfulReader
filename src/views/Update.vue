@@ -52,18 +52,19 @@ export default {
         console.log("content", content);   
         
         
+        
         //navigation
         var nav = doc.getElementById('nav_bottom');
-        console.log(nav);
+        console.log("nav", nav);
 
         //fix the links
         //TODO: change this so the absolute path is created - the current implementation doesn't work on mobile
         nav.children.forEach(element => {
-
+          console.log(element);
           if(element.className == "return"){
             element.innerHTML = "<router-link to='../'>" + element.innerText + "</router-link>";
           } else {
-          element.innerHTML = "<router-link to='" + element.attributes.href.textContent + "'>" + element.innerText + "</router-link>";
+          element.innerHTML = "<router-link to='" + element.pathname + "'>" + element.innerText + "</router-link>";
           }
         });
 
@@ -83,16 +84,14 @@ export default {
         //fix name to remove any dashes in the LP url
         lp = lp.replace(/-/g, ' ');
 
-        //add this to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
-        if(localStorage.readingList == undefined || localStorage.readingList.length == 0){
-        var readingList = [];
-      
-        readingList.push({"title": lp, "part": update});
-        } else {
-        var readingList = JSON.parse(localStorage.readingList);
-        }
+        //TODO: grab images from the API and save them in localStorage?
+        //TODO: Figure out how to get the total number of updates and save them in localStorage, use for comparing the current reading progress. -- One option is to do all this on the first page of a game instead of the first update. First update will just find the current game and keep the localStorage up to date.
+        //use https://api.rawg.io/api/games?search=gta%20v as an API   
 
-        
+
+        //add LP Update to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
+        console.log(localStorage);
+        var readingList = JSON.parse(localStorage.readingList);
 
         //check to see if the current LP exists
         var found = false;
@@ -114,6 +113,7 @@ export default {
         }
 
         if(!found){
+          //only way I can think of someone getting here would be to 
             //else push everything
             readingList.push({"title": lp, "part": update});
           
@@ -121,7 +121,7 @@ export default {
         
         //send it to LocalStorage
         localStorage.readingList = JSON.stringify(readingList);
-
+    
         
   });
 

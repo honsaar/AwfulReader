@@ -6,7 +6,7 @@
       <p>Currently Reading</p>
       <ul>
         <li v-for="(reading, index) in reading" v-bind:key="index">
-          <p><router-link :to="'lp/' + reading.title +'/' + reading.part"> {{reading.title}} | {{reading.part}}</router-link></p>
+          <p v-if="reading.part != 'Index'"><router-link :to="'lp/' + reading.title +'/' + reading.part"> {{reading.title}} | {{reading.part}}</router-link></p>
           </li>
           </ul>
           <br><br><br>
@@ -54,9 +54,7 @@ export default {
     this.reading = JSON.parse(localStorage.readingList);
     }
 
-
-    //make API calls for each game to a video game API?
-    //use https://api.rawg.io/api/games?search=gta%20v as an API    
+     
   }
 };
 </script>

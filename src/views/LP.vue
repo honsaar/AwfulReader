@@ -44,7 +44,14 @@ export default {
         var HTMLmassage = content.outerHTML;
 
         //adjust the returned content and turn it into Vue syntax for links
+        var tag;
         HTMLmassage = content.getElementsByClassName('toc');
+        if(HTMLmassage.length == 0){
+          HTMLmassage = content.getElementsByClassName('map');
+          tag = "map";
+          
+        }
+        if(tag != "map") {
         HTMLmassage.forEach(element => {
           
           element.children.forEach(e => {
@@ -54,12 +61,19 @@ export default {
           })
           
         });
+        } else {
+          HTMLmassage["0"].children.forEach(e => {
+            if(e.attributes.href != undefined){
+            e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.attributes.href.textContent + "' >" + e.innerHTML + "</router-link>";
+            }
+          
+        });
+        }
 
   
         // fix the images
         var image = content.getElementsByTagName('img');
         // image.getElementsByTagName('img');
-        console.log(image);
         image.forEach(element => {
            element.src="https://lparchive.org/" + LPSrc + "/" + element.attributes.src.value;
         });
@@ -69,6 +83,56 @@ export default {
 
         vueInstance.dom = content.outerHTML;
         
+        //LOCAL STORAGE
+
+        //GET NAME OF LP
+       var lp = LPName;
+       lp = lp.replace(/-/g, ' ');
+
+
+      // GET NUMBER OF UPDATES
+      var upNum;
+
+
+
+      //PUSH THIS
+
+        console.log(localStorage);
+        if (localStorage.readingList.length != 0 && localStorage.readingList != ""){
+        var readingList = JSON.parse(localStorage.readingList);
+        } else {
+          console.log("Empty", readingList);
+        var readingList = [];
+        
+        }
+
+
+        var found = false;
+        for(var i = 0; i < readingList.length; i++){
+          var element = readingList[i];
+          if(element.title == lp){
+            //if the lp exists
+            if(element.part){
+              //if the lp and a part exists
+              found = true;
+              break;
+
+            } else {
+              element.part = update;
+              found = true;
+              break;
+            }
+          }
+        }
+
+        if(!found){
+            //else push everything
+            readingList.push({"title": lp, "part": "Index", "total":200});
+          
+        }
+        localStorage.readingList = JSON.stringify(readingList);
+        console.log(readingList);
+
 
       });
   }
