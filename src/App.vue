@@ -9,17 +9,13 @@
 
 
 <script>
-
-
-export default {
-  
-}
+export default {};
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,600,600i,700,700i&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,600,600i,700,700i&display=swap");
 
 #app {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -44,8 +40,11 @@ li {
 img {
   max-width: 100%;
 }
-
-
+@media only screen and (max-width: 767px) {
+  img {
+    width: 100%;
+  }
+}
 
 /* Something Awful-specific CSS overrides */
 .bbc-block {
