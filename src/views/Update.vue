@@ -73,10 +73,10 @@ export default {
         
         //fix the images
         var image = content.getElementsByTagName('img');
-        // image.getElementsByTagName('img');
   
         image.forEach(element => {
            element.src="https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/" + element.attributes.src.value;
+           console.log(element);
         });
 
         vueInstance.dom = "<div>" + content.outerHTML + nav.outerHTML + "</div>";

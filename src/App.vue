@@ -40,11 +40,11 @@ li {
 img {
   max-width: 100%;
 }
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
   img {
     width: 100%;
   }
-}
+} */
 
 /* Something Awful-specific CSS overrides */
 .bbc-block {
