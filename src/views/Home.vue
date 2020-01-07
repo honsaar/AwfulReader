@@ -6,18 +6,18 @@
       <p>Currently Reading</p>
       <ul>
         <li v-for="(reading, index) in reading" v-bind:key="index">
-          <p v-if="reading.part != 'Index'"><router-link :to="'lp/' + reading.title +'/' + reading.part"> {{reading.title}} | {{reading.part}}</router-link></p>
+          <p v-if="reading.part != 'Index'"><router-link :to="'lp/' + reading.title +'/' + reading.part + '/'"> {{reading.title}} | {{reading.part}} / {{reading.total}}</router-link></p>
           </li>
           </ul>
           <br><br><br>
 
-      <!-- <div class="lp-list">
+      <div class="lp-list">
         <ul>
           <li v-for="(lp, index) in LPList" v-bind:key="index">
            <router-link :to="'lp' + lp.u"> {{lp.t}} </router-link>
             </li>
         </ul>
-      </div> -->
+      </div>
     </b-container>
 
   </div>

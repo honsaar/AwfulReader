@@ -45,31 +45,35 @@ export default {
 
         //adjust the returned content and turn it into Vue syntax for links
         var tag;
+        // GET NUMBER OF UPDATES
+        var upNum = 0;
+
         HTMLmassage = content.getElementsByClassName('toc');
         if(HTMLmassage.length == 0){
           HTMLmassage = content.getElementsByClassName('map');
           tag = "map";
-          
         }
         if(tag != "map") {
         HTMLmassage.forEach(element => {
           
           element.children.forEach(e => {
+            upNum++;
             if(e.firstChild.attributes != undefined){
-            e.innerHTML = "<router-link to='" + vueInstance.$route.path + "/" + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
+            e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
             }
           })
           
         });
         } else {
           HTMLmassage["0"].children.forEach(e => {
+            upNum++;
             if(e.attributes.href != undefined){
-            e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.attributes.href.textContent + "' >" + e.innerHTML + "</router-link>";
+            e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.attributes.href.textContent + "'>" + e.innerHTML + "</router-link>";
             }
           
         });
         }
-
+        console.log(upNum);
   
         // fix the images
         var image = content.getElementsByTagName('img');
@@ -90,8 +94,7 @@ export default {
        lp = lp.replace(/-/g, ' ');
 
 
-      // GET NUMBER OF UPDATES
-      var upNum;
+      
 
 
 
@@ -111,6 +114,10 @@ export default {
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
           if(element.title == lp){
+            //update the total number if needed
+            if(element.total != upNum){
+              element.total = upNum;
+            }
             //if the lp exists
             if(element.part){
               //if the lp and a part exists
@@ -127,7 +134,7 @@ export default {
 
         if(!found){
             //else push everything
-            readingList.push({"title": lp, "part": "Index", "total":200});
+            readingList.push({"title": lp, "part": "Index", "total":upNum});
           
         }
         localStorage.readingList = JSON.stringify(readingList);

@@ -59,12 +59,14 @@ export default {
 
         //fix the links
         //TODO: change this so the absolute path is created - the current implementation doesn't work on mobile
+        
         nav.children.forEach(element => {
           console.log(element);
+          console.log(vueInstance.$route);
           if(element.className == "return"){
-            element.innerHTML = "<router-link to='../'>" + element.innerText + "</router-link>";
+            element.outerHTML = "<router-link to='../'>" + element.innerText + "</router-link>";
           } else {
-          element.innerHTML = "<router-link to='" + element.pathname + "'>" + element.innerText + "</router-link>";
+          element.outerHTML = "<router-link to='" + element.pathname + "'>" + element.innerText + "</router-link>";
           }
         });
 
@@ -99,8 +101,11 @@ export default {
           var element = readingList[i];
           if(element.title == lp){
             //if the lp exists
-            if(element.part == update){
+            if(element.part){
               //if the lp and the part exists
+              if (element.part != update){
+                element.part = update;
+              }
               found = true;
               break;
 
