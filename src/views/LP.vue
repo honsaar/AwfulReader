@@ -48,6 +48,7 @@ export default {
         var upNum = 0;
 
         HTMLmassage = content.getElementsByClassName('toc');
+        console.log(HTMLmassage);
         if(HTMLmassage.length == 0){
           HTMLmassage = content.getElementsByClassName('map');
           tag = "map";
@@ -57,9 +58,11 @@ export default {
         }
         if(tag == "toc") {
         HTMLmassage.forEach(element => {
-          
+          console.log(element);
           element.children.forEach(e => {
+            console.log(e);
             upNum++;
+            //TODO: update this so it searches for <a> tags specifically instead of the first child
             if(e.firstChild.attributes != undefined){
             e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
             }
