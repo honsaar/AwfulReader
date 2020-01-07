@@ -105,7 +105,7 @@ export default {
       //PUSH THIS
 
         console.log(localStorage);
-        if (localStorage.readingList.length != 0 && localStorage.readingList != "" || localStorage.readingList != undefined){
+        if (localStorage.readingList.length != 0 && localStorage.readingList && "" || localStorage.readingList && undefined){
         var readingList = JSON.parse(localStorage.readingList);
         } else {
           console.log("Empty", readingList);
