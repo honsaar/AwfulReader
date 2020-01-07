@@ -35,16 +35,15 @@ export default {
       )
       .then(function(e) {
         var dataDom = e.data;
-        // console.log(e);
         var doc = new DOMParser().parseFromString(dataDom, "text/html");
         console.log("parsed", doc);
         document.title = doc.title;
         var content = doc.getElementById('content');
         console.log("content", content);        
         var HTMLmassage = content.outerHTML;
-
+        console.log(HTMLmassage);
         //adjust the returned content and turn it into Vue syntax for links
-        var tag;
+        var tag = "toc";
         // GET NUMBER OF UPDATES
         var upNum = 0;
 
@@ -52,8 +51,11 @@ export default {
         if(HTMLmassage.length == 0){
           HTMLmassage = content.getElementsByClassName('map');
           tag = "map";
+          if(HTMLmassage.length == 0) {
+            tag = "edge";
+          }
         }
-        if(tag != "map") {
+        if(tag == "toc") {
         HTMLmassage.forEach(element => {
           
           element.children.forEach(e => {
@@ -64,7 +66,7 @@ export default {
           })
           
         });
-        } else {
+        } else if(tag == "map") {
           HTMLmassage["0"].children.forEach(e => {
             upNum++;
             if(e.attributes.href != undefined){
@@ -72,6 +74,8 @@ export default {
             }
           
         });
+        } else {
+
         }
         console.log(upNum);
   
