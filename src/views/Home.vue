@@ -6,7 +6,7 @@
       <p>Currently Reading</p>
       <ul>
         <li v-for="(reading, index) in reading" v-bind:key="index">
-          <p v-if="reading.part != 'Index'"><router-link :to="'lp/' + reading.title +'/' + reading.part + '/'"> {{reading.title}} | {{reading.part}} / {{reading.total}}</router-link></p>
+          <p ><router-link :to="reading.part == 'Index' ? 'lp/' + reading.title + '/' :  'lp/' + reading.title + '/' + reading.part + '/' "> {{reading.title}} <span v-if="reading.part != 'Index'"> | {{reading.part}} / {{reading.total}}</span></router-link></p>
           </li>
           </ul>
           <br><br><br>
