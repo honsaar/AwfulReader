@@ -35,9 +35,15 @@ export default {
       )
       .then(function(e) {
         var dataDom = e.data;
+        console.log("data", dataDom);
+        
         var doc = new DOMParser().parseFromString(dataDom, "text/html");
         console.log("parsed", doc);
         document.title = doc.title;
+        
+        console.log(lp);
+        var author = doc.head.querySelector("[name~=author][content]").content;
+        console.log("author", author);
         var content = doc.getElementById('content');
         console.log("content", content);        
         var HTMLmassage = content.outerHTML;
@@ -102,7 +108,7 @@ export default {
         //LOCAL STORAGE
 
         //GET NAME OF LP
-       var lp = LPName;
+       var lp = document.title;
        lp = lp.replace(/-/g, ' ');
 
 
@@ -146,7 +152,7 @@ export default {
 
         if(!found){
             //else push everything
-            readingList.unshift({"title": lp, "part": "Index", "total":upNum});
+            readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum});
           
         }
         localStorage.readingList = JSON.stringify(readingList);

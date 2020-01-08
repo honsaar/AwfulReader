@@ -4,9 +4,16 @@
     <b-container>
 
       <p>Currently Reading</p>
+
+      
+
       <ul>
         <li v-for="(reading, index) in reading" v-bind:key="index">
-          <p ><router-link :to="reading.part == 'Index' ? 'lp/' + reading.title + '/' :  'lp/' + reading.title + '/' + reading.part + '/' "> {{reading.title}} <span v-if="reading.part != 'Index'"> | {{reading.part}} / {{reading.total}}</span></router-link></p>
+          <p ><router-link :to="reading.part == 'Index' ? 'lp/' + reading.title + '/' :  'lp/' + reading.title + '/' + reading.part + '/' "> 
+          <reading :title="reading.title" :author="reading.author" :part="reading.part" :total="reading.total"/>
+          </span>
+          
+          </router-link></p>
           </li>
           </ul>
           <br><br><br>
@@ -27,9 +34,13 @@
 // @ is an alias to /src
 
 import LPLIST from "../assets/tocdata.json";
+import reading from "../components/Reading";
 
 export default {
   name: "LetsRead",
+  components: {
+    reading
+},
   data: function() {
     return {
       LPList: [],
