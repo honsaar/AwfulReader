@@ -19,7 +19,11 @@
 
           <br><br><br>
 
-
+<p align="center"><b-button v-b-toggle.collapse-3 class="show-list">Show LP List</b-button></p>
+<br/><br/>
+  <b-collapse id="collapse-3" appear class="collapse-list">
+    
+  
 <p><strong>LP Master List</strong></p>
       <div class="lp-list">
         
@@ -37,6 +41,7 @@
             </div>
 
       </div>
+      </b-collapse>
     </b-container>
 
   </div>
@@ -127,4 +132,21 @@ transition: all .5s ease;
   color: #b0b7c5;
   margin-right: 6px;
 }
+
+.show-list {
+  background: #eceff4;
+  color: #4c566a;
+  font-weight: 600;
+  border: 0 !important;
+  transition: all 0.5s ease-in-out;
+
+}
+
+.show-list:hover {
+  background: #eceff4;
+  color: #4c566a;
+   transform: translateY(-2px);
+  box-shadow: 0 15px 15px #32325d33,0 5px 10px #0000001a !important;
+}
+
 </style>
