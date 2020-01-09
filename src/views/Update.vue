@@ -64,9 +64,9 @@ export default {
           console.log(element);
           console.log(vueInstance.$route);
           if(element.className == "return"){
-            element.outerHTML = "<router-link to='../'>" + element.innerText + "</router-link>";
+            element.outerHTML = "<a class='return' href='../'>" + element.innerText + "</a>";
           } else {
-          element.outerHTML = "<router-link to='" + element.pathname + "'>" + element.innerText + "</router-link>";
+          element.outerHTML = "<router-link class='" + element.className + "' to='" + element.pathname + "'>" + element.innerText + "</router-link>";
           }
         });
 
@@ -150,5 +150,22 @@ export default {
 </script>
 
 <style>
+.next {
+ float: right;
+}
 
+.prev {
+  float: left;
+}
+
+.return {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  display: block;
+}
+
+#nav_bottom {
+  margin-top: 2em;
+}
 </style>
