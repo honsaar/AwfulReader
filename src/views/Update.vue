@@ -132,6 +132,9 @@ export default {
             //else push everything
             var author = doc.head.querySelector("[name~=author][content]").content;
             var upNum = 0; //Not sure how to grab the number of updates from this page if you come straight here -- maybe rethink this plan
+            if(saveTitle == undefined){
+              saveTitle = lp;
+            }
             readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path});
           
         }
