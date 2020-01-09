@@ -2,7 +2,7 @@
     <div id="reading" class="item">
         <h1>{{title}}</h1>
         <p class="author">{{author}}</p> 
-        <!-- <span v-if="part != 'Index'"> {{part}} / {{total}}</span> -->
+        <span class="parted" v-if="part != 'Index'"> {{part}}</span>
     </div>
 </template>
 
@@ -46,5 +46,11 @@ width: 170px;
 
 .author {
     color: #4c566a;
+}
+
+.parted {
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 </style>
