@@ -12,13 +12,13 @@
 export default {};
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Rubik:400,400i,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Rubik:400,400i,500,600,600i,700,700i&display=swap");
 @import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
 
 #app {
   background: #fff;
   font-family: "Rubik", sans-serif;
-  color: #2e3440;
+  color: #4c566a;
   font-size: 1em;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;

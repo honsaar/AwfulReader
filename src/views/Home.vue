@@ -25,8 +25,14 @@
         
           <div v-for="(lp, index) in LPList" v-bind:key="index">
            <router-link :to="'lp' + lp.u"> 
-             <div class="lp-item"><p>{{lp.t}}</p>
-             <p class="lp-author">{{lp.a}}</p> </div>
+
+             <div class="lp-item">
+               <p>{{lp.t}}</p>
+             <p class="lp-author">{{lp.a}}</p> 
+             <div class="tags">
+             <b-badge pill class="lp-tag" v-for="(tag, index) in lp.tg" v-bind:key="index">{{tag}}</b-badge>
+             </div>
+             </div>
              </router-link>
             </div>
 
@@ -63,7 +69,7 @@ export default {
       return 0;
     });
     this.LPList = list;
-
+    console.log(list);
     //get reading list
     if(localStorage.readingList){
     this.reading = JSON.parse(localStorage.readingList);
@@ -81,9 +87,10 @@ export default {
 
 .lp-item {
   border-radius: 5px;
-  color: #2e3440;
+  color: #4c566a;
   margin-bottom: 1em;
   padding: 1em;
+  font-weight: 600;
 box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014;
 -webkit-transition: all .5s ease;
 transition: all .5s ease;
@@ -98,6 +105,8 @@ transition: all .5s ease;
 .lp-author {
   color: #d8dee9;
   font-size: 1em;
+  margin-top:-1em;
+  font-weight: 400;
 }
 
 .readContain {
@@ -111,5 +120,11 @@ transition: all .5s ease;
 }
 .readingItem h1 {
   font-size: 1.2em;
+}
+
+.lp-tag {
+  background: #eceff4 !important;
+  color: #b0b7c5;
+  margin-right: 6px;
 }
 </style>
