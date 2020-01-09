@@ -93,6 +93,10 @@ export default {
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
+          if(element.title == undefined){
+            console.log("A");
+            element.title = lp;
+          }
           //Sanitised Title
           var sanTit = element.title.replace(/\./g, '');
           sanTit = sanTit.replace(/[()]/g, '');
@@ -123,7 +127,7 @@ export default {
             //else push everything
             var author = doc.head.querySelector("[name~=author][content]").content;
             var upNum = 0; //Not sure how to grab the number of updates from this page if you come straight here -- maybe rethink this plan
-            readingList.unshift({"title": saveTitle, "author":author, "part": part, "total":upNum, "link":vueInstance.$route.path});
+            readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path});
           
         }
         
