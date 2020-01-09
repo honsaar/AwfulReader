@@ -9,7 +9,7 @@
 
       <div class="readContain">
         <div v-for="(reading, index) in reading" v-bind:key="index" class="readingItem">
-          <p><router-link :to="reading.part == 'Index' ? reading.link :  reading.link + reading.part + '/' "> 
+          <p><router-link :to="reading.part == 'Index' ? reading.link :  reading.link"> 
           <reading :title="reading.title" :author="reading.author" :part="reading.part" :total="reading.total"/>
           </span>
           
