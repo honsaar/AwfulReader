@@ -1,4 +1,6 @@
-# LetsReader
+<p align="center"><img width="40" height="40" src="frog.png"></p>
+
+# Awful Reads
 Reader for Lparchive.org (unofficial)
 
 ## What? Why?
