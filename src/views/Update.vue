@@ -76,7 +76,6 @@ export default {
   
         image.forEach(element => {
            element.src="https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/" + element.attributes.src.value;
-           console.log(element);
         });
 
         vueInstance.dom = "<div>" + content.outerHTML + nav.outerHTML + "</div>";
@@ -85,22 +84,26 @@ export default {
 
         //fix name to remove any dashes in the LP url
         lp = lp.replace(/-/g, ' ');
-
+        console.log(lp);
         //add LP Update to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
         console.log(localStorage);
         var readingList = JSON.parse(localStorage.readingList);
-
+        var saveTitle;
         //check to see if the current LP exists
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
-          console.log(element);
-          if(element.title == lp){
+          //Sanitised Title
+          var sanTit = element.title.replace(/\./g, '');
+          sanTit = sanTit.replace(/[()]/g, '');
+          if(sanTit == lp){
             //if the lp exists
-            if(element.part){
+            saveTitle = element.title;
+            if(element.part != undefined){
               //if the lp and the part exists
               if (element.part != update){
                 element.part = update;
+                element.link = vueInstance.$route.path;
                 //new update, move this to the top of the list
                 readingList.splice(i, 1);
                 readingList.unshift(element);
@@ -117,9 +120,10 @@ export default {
         }
 
         if(!found){
-          //only way I can think of someone getting here would be to 
             //else push everything
-            readingList.push({"title": lp, "part": update});
+            var author = doc.head.querySelector("[name~=author][content]").content;
+            var upNum = 0; //Not sure how to grab the number of updates from this page if you come straight here -- maybe rethink this plan
+            readingList.unshift({"title": saveTitle, "author":author, "part": part, "total":upNum, "link":vueInstance.$route.path});
           
         }
         

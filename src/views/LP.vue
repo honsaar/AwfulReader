@@ -152,7 +152,7 @@ export default {
 
         if(!found){
             //else push everything
-            readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum});
+            readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum, "link":vueInstance.$route.path});
           
         }
         localStorage.readingList = JSON.stringify(readingList);

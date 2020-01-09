@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/"><i class="las la-frog"></i></router-link>
     </div>
     <router-view :key="$route.fullPath"></router-view>
   </div>
@@ -12,10 +12,15 @@
 export default {};
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Rubik:400,400i,600,600i,700,700i&display=swap");
+@import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
 
 #app {
-  font-family: "Roboto", sans-serif;
+  background: #fff;
+  font-family: "Rubik", sans-serif;
+  color: #2e3440;
+  font-size: 1em;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,13 +29,19 @@ export default {};
   padding: 30px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+#nav i {
+  font-size: 1.5em;
+}
+a {
+  color: #5e81ac;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #2e3440;
 }
 
 li {
@@ -49,7 +60,7 @@ img {
 /* Something Awful-specific CSS overrides */
 .bbc-block {
   padding: 1em;
-  background: #f6f5f5;
-  border-radius: 1em;
+  background: #eceff4;
+  border-radius: 3px;
 }
 </style>
