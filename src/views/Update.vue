@@ -97,10 +97,15 @@ export default {
             console.log("A");
             element.title = lp;
           }
+          console.log("FLAG HERE");
           //Sanitised Title
+          console.log(element.title);
           var sanTit = element.title.replace(/\./g, '');
-          sanTit = sanTit.replace(/[()]/g, '');
+          sanTit = sanTit.replace(/[(),:]/g, '');
+          console.log(sanTit);
+          console.log(lp);
           if(sanTit == lp){
+            console.log("exists");
             //if the lp exists
             saveTitle = element.title;
             if(element.part != undefined){
