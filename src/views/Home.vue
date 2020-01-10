@@ -18,10 +18,13 @@
         </div>
 
         <div v-else>
-          <p>Not reading anything!</p>
+          <p style="text-align: center;">
+            <i class="las la-surprise" style="font-size: 3em;"></i><br>
+            Your reading list is empty! Get started by choosing an LP from below.<br/><br/>
+            <i class="las la-hand-point-down" style="font-size: 2em;"></i>
+            </p>
           </div>
 
-          <br><br><br>
 
 <p align="center"><b-button v-b-toggle.collapse-3 class="show-list">Show LP List</b-button></p>
 <br/><br/>
