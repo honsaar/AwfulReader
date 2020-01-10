@@ -9,6 +9,8 @@
 
 <script>
 import VRuntimeTemplate from "v-runtime-template";
+import LPLIST from "../assets/tocdata.json";
+
 export default {
   name: "LP",
    components: {
@@ -86,20 +88,36 @@ export default {
 
         //fix name to remove any dashes in the LP url
         lp = lp.replace(/-/g, ' ');
-        console.log(lp);
-        //add LP Update to the localStorage for reading lists -- if a user clicks on an update, then it's worth counting it as being part of their reading list.
-        console.log(localStorage);
+ 
+        if(localStorage.readingList){
         var readingList = JSON.parse(localStorage.readingList);
+        }
+        else {
+          var readingList = [];
+        }
         var saveTitle;
         //check to see if the current LP exists
         var found = false;
+        console.log("finding");
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
 
           //comparison
           if(element.title == undefined){
             //TODO: change this to look up in the master list
-            element.title = lp;
+              console.log("no save title");
+                  var search = "/" + id + "/";
+                console.log("searching", search);
+
+                var savedTitle = LPLIST.filter(function(item){
+                  if(item.u == search)
+                    return item.t;
+                });
+                console.log("returned", savedTitle[0]);
+              var saveTitle = savedTitle[0].t;
+
+            element.title = saveTitle;
+            console.log("updated:", element.title);
           }
          
 
@@ -107,10 +125,10 @@ export default {
           //get the second element in the array, it's the same for new LPs and existing ones
 
 
+
           if(compID[2] == id){
             console.log("exists");
             //if the lp exists
-            saveTitle = element.title;
             if(element.part != undefined){
               if(element.author == undefined){
                  var author = doc.head.querySelector("[name~=author][content]").content;
@@ -137,10 +155,23 @@ export default {
         }
         if(!found){
             //else push everything
+            console.log("not found");
             var author = doc.head.querySelector("[name~=author][content]").content;
             var upNum = 0; //Not sure how to grab the number of updates from this page if you come straight here -- maybe rethink this plan
             if(saveTitle == undefined){
-              saveTitle = lp;
+             console.log("no save title");
+                  var search = "/" + id + "/";
+                console.log("searching", search);
+
+                var savedTitle = LPLIST.filter(function(item){
+                  if(item.u == search)
+                    return item.t;
+                });
+                console.log("returned", savedTitle[0]);
+              var saveTitle = savedTitle[0].t;
+
+            element.title = saveTitle;
+            console.log("updated:", element.title);
             }
             readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path});
           

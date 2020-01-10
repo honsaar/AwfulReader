@@ -133,8 +133,6 @@ export default {
         var readingList = [];
         
         }
-
-
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
@@ -158,11 +156,9 @@ export default {
             }
           }
         }
-
         if(!found){
             //else push everything
             readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum, "link":vueInstance.$route.path});
-          
         }
         localStorage.readingList = JSON.stringify(readingList);
         console.log(readingList);
