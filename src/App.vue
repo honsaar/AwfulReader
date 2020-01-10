@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" :class="[darkMode ? 'dark' : 'light']">
     <div id="nav">
       <router-link to="/"><i class="las la-frog"></i></router-link>
+      <a style="float: right;" @click="darkMode = !darkMode"><i class="las la-moon"></i></a>
     </div>
     <router-view :key="$route.fullPath"></router-view>
   </div>
@@ -9,20 +10,46 @@
 
 
 <script>
-export default {};
+export default {
+  data: function(){
+    return {
+      darkMode: false
+    }
+  }
+};
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Rubik:400,400i,500,600,600i,700,700i&display=swap");
 @import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
 
+
 #app {
-  background: #fff;
   font-family: "Rubik", sans-serif;
-  color: #4c566a;
+  transition: all 1s ease-in-out;
   font-size: 1em;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.light {
+  background: #fff;
+  color: #4c566a;
+}
+
+.dark {
+  background: #2e3440;
+  color: #eceff4;
+}
+
+.dark a {
+  color: #4c566a;
+}
+
+.light a {
+  color: #2e3440;
 }
 
 #nav {

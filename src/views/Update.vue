@@ -2,9 +2,7 @@
   <div class="update">
     <b-container>
     <v-runtime-template :key="$route.fullPath" :template="dom" ref="dom"></v-runtime-template>
-    <div id="nav">
-
-    </div>
+    
     </b-container>
   </div>
 </template>
@@ -78,7 +76,7 @@ export default {
            element.src="https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/" + element.attributes.src.value;
         });
 
-        vueInstance.dom = "<div>" + content.outerHTML + nav.outerHTML + "</div>";
+        vueInstance.dom = "<div>" + content.outerHTML  + nav.outerHTML + "</div>";
 
         //LOCAL STORAGE BIZ
 
@@ -94,10 +92,10 @@ export default {
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
           if(element.title == undefined){
-            console.log("A");
+
             element.title = lp;
           }
-          console.log("FLAG HERE");
+
           //Sanitised Title
           console.log(element.title);
           var sanTit = element.title.replace(/\./g, '');
@@ -109,6 +107,10 @@ export default {
             //if the lp exists
             saveTitle = element.title;
             if(element.part != undefined){
+              if(element.author == undefined){
+                 var author = doc.head.querySelector("[name~=author][content]").content;
+                element.author = author;
+              }
               //if the lp and the part exists
               if (element.part != update){
                 element.part = update;
