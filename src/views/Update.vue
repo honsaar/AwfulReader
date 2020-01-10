@@ -25,6 +25,10 @@ export default {
     var lp = this.$route.params.name;
     var update = this.$route.params.update;
 
+
+    //for future ID use
+    var id = lp;
+
     console.log(lp);
     console.log(update);
 
@@ -91,18 +95,19 @@ export default {
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
-          if(element.title == undefined){
 
+          //comparison
+          if(element.title == undefined){
+            //TODO: change this to look up in the master list
             element.title = lp;
           }
+         
 
-          //Sanitised Title
-          console.log(element.title);
-          var sanTit = element.title.replace(/\./g, '');
-          sanTit = sanTit.replace(/[(),:]/g, '');
-          console.log(sanTit);
-          console.log(lp);
-          if(sanTit == lp){
+          var compID = element.link.split("/");
+          //get the second element in the array, it's the same for new LPs and existing ones
+
+
+          if(compID[2] == id){
             console.log("exists");
             //if the lp exists
             saveTitle = element.title;
@@ -121,15 +126,15 @@ export default {
               }
               found = true;
               break;
-
             } else {
               element.part = update;
               found = true;
               break;
             }
           }
-        }
 
+          //end comparison
+        }
         if(!found){
             //else push everything
             var author = doc.head.querySelector("[name~=author][content]").content;

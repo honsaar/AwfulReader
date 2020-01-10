@@ -27,6 +27,7 @@ export default {
     console.log(this);
     console.log("Route", this.$route);
     var LPName = this.$route.params.name;
+    var id = LPName;
     var LPSrc = LPName.replace(/\s+/g, '-');
     var vueInstance = this;
     var testing = axios
@@ -106,11 +107,17 @@ export default {
         vueInstance.dom = content.outerHTML;
         
         //LOCAL STORAGE
+        
 
         //GET NAME OF LP
        var lp = document.title;
        lp = lp.replace(/-/g, ' ');
 
+        
+        //get the second element in the array, it's the same for new LPs and existing ones
+
+
+      
 
       
 
@@ -131,7 +138,9 @@ export default {
         var found = false;
         for(var i = 0; i < readingList.length; i++){
           var element = readingList[i];
-          if(element.title == lp){
+          var compID = element.link.split("/");
+
+          if(compID[2] == id){
             //update the total number if needed
             if(element.total != upNum){
               element.total = upNum;
