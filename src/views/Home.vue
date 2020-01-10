@@ -3,10 +3,9 @@
 
     <b-container>
 
+
+      <div v-if="reading.length > 0">
       <p><strong>Currently Reading</strong></p>
-
-      
-
       <div class="readContain">
         <div v-for="(reading, index) in reading" v-bind:key="index" class="readingItem">
           <p><router-link :to="reading.part == 'Index' ? reading.link :  reading.link"> 
@@ -15,6 +14,11 @@
           
           </router-link></p>
           </div>
+          </div>
+        </div>
+
+        <div v-else>
+          <p>Not reading anything!</p>
           </div>
 
           <br><br><br>

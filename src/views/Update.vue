@@ -169,9 +169,6 @@ export default {
                 });
                 console.log("returned", savedTitle[0]);
               var saveTitle = savedTitle[0].t;
-
-            element.title = saveTitle;
-            console.log("updated:", element.title);
             }
             readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path});
           
