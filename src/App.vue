@@ -1,8 +1,8 @@
 <template>
-  <div id="app" :class="[darkMode ? 'dark' : 'light']">
+  <div id="app" :class="[darkMode == 'true' ? 'dark' : 'light']">
     <div id="nav">
       <router-link to="/"><i class="las la-frog"></i></router-link>
-      <a style="float: right;" @click="darkMode = !darkMode"><i class="las la-moon"></i></a>
+      <a style="float: right;" @click="changeMode()"><i class="las la-moon"></i></a>
     </div>
     <router-view :key="$route.fullPath"></router-view>
   </div>
@@ -14,7 +14,22 @@
 export default {
   data: function(){
     return {
-      darkMode: false
+      darkMode: 'false'
+    }
+  },
+  created(){
+    this.darkMode = localStorage.darkMode;
+    console.log("Dark?", this.darkMode);
+  },
+  methods: {
+    changeMode(){
+      //using strings to keep localStorage consistent
+      if(this.darkMode == 'true'){
+        this.darkMode = 'false';
+      } else {
+        this.darkMode = 'true';
+      }
+      localStorage.darkMode = this.darkMode;
     }
   }
 };
