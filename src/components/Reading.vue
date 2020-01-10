@@ -28,15 +28,23 @@ props: ["title", "author", "part", "total"],
 <style>
 .item {
     padding: 2em;
-    background: #2e3440;
-    color: #eceff4;
     border-radius: 5px;
     box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014;
--webkit-transition: all .5s ease;
-transition: all .5s ease;
-width: 170px;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    width: 200px;
   max-height: 300px;
-  min-height: 200px;
+  min-height: 170px;
+}
+
+.dark .item {
+    background: #3b4252;
+    color: #eceff4;
+}
+
+.light .item {
+    background: #2e3440;
+    color: #eceff4;
 }
 
 .item:hover {
@@ -45,7 +53,16 @@ width: 170px;
 }
 
 .author {
+    transition: all .5s ease;
+}
+
+.light .author {
     color: #4c566a;
+}
+
+.dark .author {
+    color: #eceff4;
+    
 }
 
 .parted {

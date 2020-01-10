@@ -117,6 +117,7 @@ transition: all .5s ease;
 .readContain {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .readingItem {

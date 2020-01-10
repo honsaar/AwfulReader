@@ -67,9 +67,6 @@ a:hover {
   text-decoration: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #2e3440;
-}
 
 li {
   list-style-type: none;
