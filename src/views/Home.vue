@@ -7,15 +7,17 @@
         </p>
         <transition-group name="list" class="readContain" tag="div">
           <div v-for="(red, index) in reading" :key="index" class="readingItem">
-            <span class="remover" @click="removeItem(red, index)">get this out of your life</span>
+           
             <p>
               <router-link :to="red.part == 'Index' ? red.link :  red.link">
                 <reading
+                  :index="index"
                   :title="red.title"
                   :author="red.author"
                   :part="red.part"
                   :total="red.total"
                   :image="red.image"
+                  :removeFunction="removeItem"
                 />
               </router-link>
             </p>
@@ -99,8 +101,9 @@ export default {
     }
   },
   methods: {
-    removeItem(item, index) {
-      console.log("remove " + item.title + " from list at index " + index);
+    removeItem(title, index) {
+      console.log("AAA");
+      console.log("remove " + title + " from list at index " + index);
       console.log(this.reading[index]);
       console.log(this.reading);
 
@@ -126,13 +129,20 @@ export default {
   padding: 1em;
   font-weight: 600;
   box-shadow: 0 4px 6px #32325d1c, 0 1px 3px #00000014;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .lp-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
+}
+
+.lp-item:active {
+  -webkit-box-shadow: none !important;
+box-shadow: none !important;
+-webkit-transform: translateY(1px);
+transform: translateY(1px);
 }
 
 .lp-author {
@@ -149,9 +159,10 @@ export default {
 }
 
 .readingItem {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease;
   margin: 10px;
   display: inline-block;
+  
 }
 
 .readingItem:hover {
@@ -161,6 +172,14 @@ export default {
 .readingItem:hover .item {
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
+
+.readingItem:active .item {
+  -webkit-box-shadow: none !important;
+box-shadow: none !important;
+-webkit-transform: translateY(2px);
+transform: translateY(2px);
+}
+
 
 .readingItem h1 {
   font-size: 1.2em;
@@ -187,22 +206,8 @@ export default {
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
 
-.remover {
-  font-size: 0.4em;
-  position: relative;
-  top: 84%;
-  left: 60%;
-  text-align: right;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  color: #fff;
-}
 
-.remover:hover {
-  color: #4c566a;
-  cursor: pointer;
-  z-index: 1;
-}
+
 
 .list-enter, .list-leave-to
 /* .list-complete-leave-active below version 2.1.8 */ {
@@ -223,8 +228,5 @@ export default {
     margin: 1em;
   }
 
-  .remover {
-    left: 80%;
-  }
 }
 </style>
