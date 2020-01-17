@@ -156,12 +156,31 @@ export default {
             }
           }
         }
+
+
+
         if(!found){
-            //else push everything
-            readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum, "link":vueInstance.$route.path});
+          console.log("AAA");
+          var BGimage;
+          console.log(lp);
+              var vgdb = axios
+              .get(
+                "https://api.rawg.io/api/games?search=" + lp
+              )
+              .then(function(e) {
+              BGimage = e.data.results[0].background_image;
+              console.log(BGimage);
+              //else push everything
+            readingList.unshift({"title": lp, "author":author, "part": "Index", "total":upNum, "link":vueInstance.$route.path, "image": BGimage});
+            localStorage.readingList = JSON.stringify(readingList);
+            console.log(readingList);
+              });
+        } else {
+          console.log("updating");
+          localStorage.readingList = JSON.stringify(readingList);
+            console.log(readingList);
         }
-        localStorage.readingList = JSON.stringify(readingList);
-        console.log(readingList);
+        
 
 
       });

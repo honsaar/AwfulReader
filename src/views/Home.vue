@@ -1,56 +1,67 @@
 <template>
   <div class="home">
-
     <b-container>
-
-
       <div v-if="reading.length > 0">
-      <p><strong>Currently Reading</strong></p>
-      <div class="readContain">
-        <div v-for="(reading, index) in reading" v-bind:key="index" class="readingItem">
-          <p><router-link :to="reading.part == 'Index' ? reading.link :  reading.link"> 
-          <reading :title="reading.title" :author="reading.author" :part="reading.part" :total="reading.total"/>
-          </span>
-          
-          </router-link></p>
-          </div>
-          </div>
-        </div>
-
-        <div v-else>
-          <p style="text-align: center;">
-            <i class="las la-surprise" style="font-size: 3em;"></i><br>
-            Your reading list is empty! Get started by choosing an LP from below.<br/><br/>
-            <i class="las la-hand-point-down" style="font-size: 2em;"></i>
+        <p>
+          <strong>Currently Reading</strong>
+        </p>
+        <transition-group name="list" class="readContain" tag="div">
+          <div v-for="(red, index) in reading" :key="index" class="readingItem">
+            <span class="remover" @click="removeItem(red, index)">get this out of your life</span>
+            <p>
+              <router-link :to="red.part == 'Index' ? red.link :  red.link">
+                <reading
+                  :title="red.title"
+                  :author="red.author"
+                  :part="red.part"
+                  :total="red.total"
+                  :image="red.image"
+                />
+              </router-link>
             </p>
           </div>
-
-
-<p align="center"><b-button v-b-toggle.collapse-3 class="show-list">Show LP List</b-button></p>
-<br/><br/>
-  <b-collapse id="collapse-3" appear class="collapse-list">
-    
-  
-<p><strong>LP Master List</strong></p>
-      <div class="lp-list">
-        
-          <div v-for="(lp, index) in LPList" v-bind:key="index">
-           <router-link :to="'lp' + lp.u"> 
-
-             <div class="lp-item">
-               <p>{{lp.t}}</p>
-             <p class="lp-author">{{lp.a}}</p> 
-             <div class="tags">
-             <b-badge pill class="lp-tag" v-for="(tag, index) in lp.tg" v-bind:key="index">{{tag}}</b-badge>
-             </div>
-             </div>
-             </router-link>
-            </div>
-
+        </transition-group>
       </div>
+
+      <div v-else>
+        <p style="text-align: center;">
+          <i class="las la-surprise" style="font-size: 3em;"></i>
+          <br />Your reading list is empty! Get started by choosing an LP from below.
+          <br />
+          <br />
+          <i class="las la-hand-point-down" style="font-size: 2em;"></i>
+        </p>
+      </div>
+
+      <p align="center">
+        <b-button v-b-toggle.collapse-3 class="show-list">Show/Hide LP List</b-button>
+      </p>
+      <br />
+      <br />
+      <b-collapse id="collapse-3" appear class="collapse-list">
+        <p>
+          <strong>LP Master List</strong>
+        </p>
+        <div class="lp-list">
+          <div v-for="(lp, index) in LPList" v-bind:key="index">
+            <router-link :to="'lp' + lp.u">
+              <div class="lp-item">
+                <p>{{lp.t}}</p>
+                <p class="lp-author">{{lp.a}}</p>
+                <div class="tags">
+                  <b-badge
+                    pill
+                    class="lp-tag"
+                    v-for="(tag, index) in lp.tg"
+                    v-bind:key="index"
+                  >{{tag}}</b-badge>
+                </div>
+              </div>
+            </router-link>
+          </div>
+        </div>
       </b-collapse>
     </b-container>
-
   </div>
 </template>
 
@@ -64,7 +75,7 @@ export default {
   name: "LetsRead",
   components: {
     reading
-},
+  },
   data: function() {
     return {
       LPList: [],
@@ -83,11 +94,22 @@ export default {
     this.LPList = list;
     console.log(list);
     //get reading list
-    if(localStorage.readingList){
-    this.reading = JSON.parse(localStorage.readingList);
+    if (localStorage.readingList) {
+      this.reading = JSON.parse(localStorage.readingList);
     }
-    
-     
+  },
+  methods: {
+    removeItem(item, index) {
+      console.log("remove " + item.title + " from list at index " + index);
+      console.log(this.reading[index]);
+      console.log(this.reading);
+
+      var localItem = JSON.parse(localStorage.readingList);
+      localItem.splice(index, 1);
+      console.log(localItem);
+      localStorage.readingList = JSON.stringify(localItem);
+      this.reading.splice(index, 1);
+    }
   }
 };
 </script>
@@ -103,21 +125,20 @@ export default {
   margin-bottom: 1em;
   padding: 1em;
   font-weight: 600;
-box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014;
--webkit-transition: all .5s ease;
-transition: all .5s ease;
+  box-shadow: 0 4px 6px #32325d1c, 0 1px 3px #00000014;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .lp-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 15px #32325d33,0 5px 10px #0000001a !important;
+  box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
-
 
 .lp-author {
   color: #d8dee9;
   font-size: 1em;
-  margin-top:-1em;
+  margin-top: -1em;
   font-weight: 400;
 }
 
@@ -128,9 +149,19 @@ transition: all .5s ease;
 }
 
 .readingItem {
-  
+  transition: all 0.5s ease-in-out;
   margin: 10px;
+  display: inline-block;
 }
+
+.readingItem:hover {
+  transform: translateY(-2px);
+}
+
+.readingItem:hover .item {
+  box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
+}
+
 .readingItem h1 {
   font-size: 1.2em;
 }
@@ -147,14 +178,53 @@ transition: all .5s ease;
   font-weight: 600;
   border: 0 !important;
   transition: all 0.5s ease-in-out;
-
 }
 
 .show-list:hover {
   background: #eceff4;
   color: #4c566a;
-   transform: translateY(-2px);
-  box-shadow: 0 15px 15px #32325d33,0 5px 10px #0000001a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
 
+.remover {
+  font-size: 0.4em;
+  position: relative;
+  top: 84%;
+  left: 60%;
+  text-align: right;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #fff;
+}
+
+.remover:hover {
+  color: #4c566a;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.list-enter, .list-leave-to
+/* .list-complete-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.list-leave-active {
+  position: absolute;
+}
+
+@media (max-width: 576px) {
+  .item {
+    min-height: 0px;
+    width: 100% !important;
+  }
+
+  .readingItem {
+    width: 95% !important;
+    margin: 1em;
+  }
+
+  .remover {
+    left: 80%;
+  }
+}
 </style>

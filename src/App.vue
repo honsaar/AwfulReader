@@ -67,6 +67,21 @@ export default {
   color: #2e3440;
 }
 
+.dark .lp-item{
+  color: white;
+}
+
+.dark .lp-author {
+  color: #d8dee9;
+}
+
+.dark .lp-tag {
+  background: #4c566a !important;
+  color: #2e3440;
+}
+
+
+
 #nav {
   padding: 30px;
 }

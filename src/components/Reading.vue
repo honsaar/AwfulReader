@@ -1,33 +1,26 @@
 <template>
-    <div id="reading" class="item">
+<div class="item">
+     <div class="bg-img" v-bind:style="{ backgroundImage: 'url(' + image + ')'} ">
+    <div id="reading" class="readItem">
+            <div class="item-content">
         <h1>{{title}}</h1>
         <p class="author">{{author}}</p> 
         <span class="parted" v-if="part != 'Index'"> {{part}}</span>
+        
+        </div>
+        </div>
+    </div>
     </div>
 </template>
 
 <script>
 export default {
-props: ["title", "author", "part", "total"],
- mounted: function() {
-     console.log(this);
-     console.log(this.title);
-     //TODO: grab images from the API and save them
-    //  var vgdb = axios
-    //   .get(
-    //     "https://api.rawg.io/api/games?search=" + this.title
-    //   )
-    //   .then(function(e) {
-    //    console.log(e);
-    //   });
-
- }
+props: ["title", "author", "part", "total", "image"],
 }
 </script>
 
 <style>
 .item {
-    padding: 2em;
     border-radius: 5px;
     box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014;
     -webkit-transition: all .5s ease;
@@ -37,19 +30,35 @@ props: ["title", "author", "part", "total"],
   min-height: 170px;
 }
 
-.dark .item {
-    background: #3b4252;
+.item-content {
+        padding: 2em;
+        opacity: 1 !important;
+        border-radius: 5px;
+}
+
+.bg-img {
+    background-size: auto;
+    border-radius: 5px;
+    background-position: 50%; 
+}
+
+
+
+
+
+.dark .readItem {
+    background: rgba(59, 66, 82, 0.9);
     color: #eceff4;
 }
 
-.light .item {
-    background: #2e3440;
+.light .readItem {
+    background: rgba(46, 52, 64, 0.9);
     color: #eceff4;
 }
 
-.item:hover {
- transform: translateY(-2px);
-  box-shadow: 0 15px 15px #32325d33,0 5px 10px #0000001a !important;
+.readItem {
+    border-radius: 5px;
+    min-height: 240px;
 }
 
 .author {
@@ -57,7 +66,7 @@ props: ["title", "author", "part", "total"],
 }
 
 .light .author {
-    color: #4c566a;
+    color: #c0c3c9;
 }
 
 .dark .author {
