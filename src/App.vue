@@ -25,10 +25,16 @@ export default {
       //using strings to keep localStorage consistent
       if(this.darkMode == 'true'){
         this.darkMode = 'false';
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
       } else {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
         this.darkMode = 'true';
       }
       localStorage.darkMode = this.darkMode;
+
+      
     }
   }
 };
