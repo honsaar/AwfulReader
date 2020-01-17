@@ -2,7 +2,7 @@
 <div class="item">
      <div class="bg-img" v-bind:style="{ backgroundImage: 'url(' + image + ')'} ">
     <div id="reading" class="readItem">
-        <p class="remover" @click="removeItem"><i class="las la-trash-alt"></i></p>
+        <p class="remover"><i class="las la-trash-alt" @click="removeItem"></i></p>
             <div class="item-content">
                  
         <h1>{{title}}</h1>
@@ -105,7 +105,7 @@ methods:{
 }
 
 
-.remover:hover {
+.remover i:hover {
   color: #4c566a;
   cursor: pointer;
   z-index: 1;
