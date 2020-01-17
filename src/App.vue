@@ -65,11 +65,13 @@ export default {
 .light {
   background: #fff;
   color: #4c566a;
+  transition: all 1s ease-in-out;
 }
 
 .dark {
   background: #2e3440;
   color: #eceff4;
+  transition: all 1s ease-in-out;
 }
 
 .dark a {
