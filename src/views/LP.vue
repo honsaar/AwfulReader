@@ -69,9 +69,12 @@ export default {
           element.children.forEach(e => {
             console.log(e);
             upNum++;
-            //TODO: update this so it searches for <a> tags specifically instead of the first child
-            if(e.firstChild.attributes != undefined){
-            e.innerHTML = "<router-link to='" + vueInstance.$route.path + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
+            var tag = e.getElementsByTagName("A")[0];
+            if(tag != undefined){
+
+            if(tag.attributes != undefined){
+            tag.innerHTML = "<router-link to='" + vueInstance.$route.path + e.firstChild.attributes.href.textContent + "' >" + e.innerText + "</router-link>";
+            }
             }
           })
           

@@ -8,7 +8,6 @@
   </div>
 </template>
 
-
 <script>
 
 export default {
@@ -106,6 +105,7 @@ export default {
 }
 a {
   color: #5e81ac;
+  font-weight: 700;
 }
 
 a:hover {
