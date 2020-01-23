@@ -207,6 +207,7 @@ export default {
 
 #nav_bottom {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .fulfilling-square-spinner , .fulfilling-square-spinner * {
