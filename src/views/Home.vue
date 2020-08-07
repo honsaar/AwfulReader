@@ -1,5 +1,16 @@
 <template>
   <div class="home">
+  <div class="hero">
+
+    
+    <b-container>
+      <h1>Reading Awful</h1>
+    <p>A minimal reader replacement for <a href="https://www.lparchive.org">LPArchive.org</a> <br/>with Let's Play's from the Something Awful forums.</p>
+    </b-container>
+
+
+
+  </div>
     <b-container>
       <div v-if="reading.length > 0">
         <p>
@@ -118,6 +129,25 @@ export default {
 </script>
 
 <style>
+
+.hero {
+  min-height: 700px;
+  padding-top: 15em;
+  margin-bottom: 2em;
+  background: #eef2f3;
+  color: black;
+  background-image: url('../assets/garbageman.png');
+  background-repeat: no-repeat;
+  background-position-x: 40vw;
+}
+
+
+.hero h1 {
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  font-size: 500%;
+}
+
 .lp-list {
   border-radius: 5px;
 }

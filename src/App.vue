@@ -1,10 +1,10 @@
 <template>
-  <div id="app" :class="[darkMode == 'true' ? 'dark' : 'light']">
+  <div id="app">
     <div id="nav">
-      <router-link to="/"><i class="las la-frog"></i></router-link>
+      <router-link to="/" style="float:left;"><i class="las la-frog"></i></router-link>
       <a style="float: right;" @click="changeMode()"><i class="las la-moon"></i></a>
     </div>
-    <router-view :key="$route.fullPath"></router-view>
+    <router-view  :class="[darkMode == 'true' ? 'dark' : 'light']" :key="$route.fullPath"></router-view>
   </div>
 </template>
 
@@ -46,12 +46,13 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Rubik:400,400i,500,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,400i,500,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,500,600,600i,700,700i&display=swap");
 @import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
-
+/* https://coolors.co/fffcf2-ccc5b9-403d39-252422-eb5e28 */
 
 #app {
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
   transition: all 1s ease-in-out;
   font-size: 1em;
   line-height: 1.7;
@@ -62,23 +63,23 @@ export default {
 }
 
 .light {
-  background: #fff;
-  color: #4c566a;
+  background: #FCFEFF;
+  color: #252422;
   transition: all 1s ease-in-out;
 }
 
 .dark {
-  background: #2e3440;
-  color: #eceff4;
+  background: #2E3440;
+  color: #FCFEFF;
   transition: all 1s ease-in-out;
 }
 
 .dark a {
-  color: #4c566a;
+  color: #6c89ff;
 }
 
 .light a {
-  color: #2e3440;
+  color: #6c89ff;
 }
 
 .dark .lp-item{
@@ -98,6 +99,8 @@ export default {
 
 #nav {
   padding: 30px;
+  position: fixed;
+  width: 100%;
 }
 
 #nav i {
@@ -109,7 +112,7 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 
 
@@ -132,4 +135,6 @@ img {
   background: #eceff4;
   border-radius: 3px;
 }
+
+
 </style>

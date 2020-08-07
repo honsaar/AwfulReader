@@ -29,6 +29,7 @@ methods:{
 </script>
 
 <style>
+
 .item {
     border-radius: 5px;
     /* box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014; */
@@ -37,6 +38,7 @@ methods:{
     width: 200px;
   max-height: 300px;
   min-height: 170px;
+
 }
 
 
