@@ -43,6 +43,7 @@ export default {
       
     }
   }
+ 
 };
 </script>
 <style>
@@ -50,6 +51,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,500,600,600i,700,700i&display=swap");
 @import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
 /* https://coolors.co/fffcf2-ccc5b9-403d39-252422-eb5e28 */
+/* https://coolors.co/fcfeff-eef2f3-885a89-252422-6c89ff */
 
 #app {
   font-family: "Inter", sans-serif;
@@ -112,7 +114,7 @@ a {
 }
 
 a:hover {
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 
 

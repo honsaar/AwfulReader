@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-  <div class="hero">
+  <!-- <div class="hero">
 
     
     <b-container>
@@ -10,8 +10,9 @@
 
 
 
-  </div>
+  </div> -->
     <b-container>
+      
       <div v-if="reading.length > 0">
         <p>
           <strong>Currently Reading</strong>
@@ -46,34 +47,35 @@
         </p>
       </div>
 
-      <p align="center">
-        <b-button v-b-toggle.collapse-3 class="show-list">Show/Hide LP List</b-button>
-      </p>
-      <br />
-      <br />
-      <b-collapse id="collapse-3" appear class="collapse-list">
+      <div class="search-wrapper">
+        <p style="text-align: center;">
+    <input type="text" v-model="search" placeholder="Search title.."/>
+    </p>
+  </div>
+
+
         <p>
           <strong>LP Master List</strong>
         </p>
         <div class="lp-list">
-          <div v-for="(lp, index) in LPList" v-bind:key="index">
+          <div class="lp-listing" v-for="(lp, index) in filteredList" v-bind:key="index">
             <router-link :to="'lp' + lp.u">
               <div class="lp-item">
                 <p>{{lp.t}}</p>
                 <p class="lp-author">{{lp.a}}</p>
                 <div class="tags">
-                  <b-badge
+                  <!-- <b-badge
                     pill
                     class="lp-tag"
                     v-for="(tag, index) in lp.tg"
                     v-bind:key="index"
-                  >{{tag}}</b-badge>
+                  >{{tag}}</b-badge> -->
                 </div>
               </div>
             </router-link>
           </div>
         </div>
-      </b-collapse>
+
     </b-container>
   </div>
 </template>
@@ -91,6 +93,7 @@ export default {
   },
   data: function() {
     return {
+      search: '',
       LPList: [],
       reading: []
     };
@@ -124,6 +127,13 @@ export default {
       localStorage.readingList = JSON.stringify(localItem);
       this.reading.splice(index, 1);
     }
+  },
+   computed: {
+    filteredList() {
+      return this.LPList.filter(lp => {
+        return lp.t.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   }
 };
 </script>
@@ -149,13 +159,22 @@ export default {
 }
 
 .lp-list {
-  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.lp-listing {
+  width: 210px;
+  
 }
 
 .lp-item {
   border-radius: 5px;
+  height: 230px;
   color: #4c566a;
-  margin-bottom: 1em;
+  margin: 1em;
   padding: 1em;
   font-weight: 600;
   box-shadow: 0 4px 6px #32325d1c, 0 1px 3px #00000014;
