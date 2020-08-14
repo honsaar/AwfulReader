@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-  <!-- <div class="hero">
+    <!-- <div class="hero">
 
     
     <b-container>
@@ -10,16 +10,14 @@
 
 
 
-  </div> -->
+    </div>-->
     <b-container>
-      
       <div v-if="reading.length > 0">
         <p>
           <strong>Currently Reading</strong>
         </p>
         <transition-group name="list" class="readContain" tag="div">
           <div v-for="(red, index) in reading" :key="index" class="readingItem">
-           
             <p>
               <router-link :to="red.part == 'Index' ? red.link :  red.link">
                 <reading
@@ -49,33 +47,34 @@
 
       <div class="search-wrapper">
         <p style="text-align: center;">
-    <input type="text" v-model="search" placeholder="Search title.."/>
-    </p>
-  </div>
-
-
-        <p>
-          <strong>LP Master List</strong>
+          <input type="text" v-model="search" placeholder="Search title.." />
         </p>
-        <div class="lp-list">
-          <div class="lp-listing" v-for="(lp, index) in filteredList" v-bind:key="index">
-            <router-link :to="'lp' + lp.u">
-              <div class="lp-item">
-                <p>{{lp.t}}</p>
-                <p class="lp-author">{{lp.a}}</p>
-                <div class="tags">
-                  <!-- <b-badge
+      </div>
+
+     
+      <div class="">
+        <transition-group name="list" tag="div" class="lp-list">
+        <div class="lp-listing" v-for="(lp, index) in filteredList" v-if="index < limit && search.length > 0" v-bind:key="index">
+          <router-link :to="'lp' + lp.u">
+            <div class="lp-item">
+              <p>{{lp.t}}</p>
+              <p class="lp-author">{{lp.a}}</p>
+              <div class="tags">
+                <!-- <b-badge
                     pill
                     class="lp-tag"
                     v-for="(tag, index) in lp.tg"
                     v-bind:key="index"
-                  >{{tag}}</b-badge> -->
-                </div>
+                >{{tag}}</b-badge>-->
               </div>
-            </router-link>
-          </div>
+            </div>
+          </router-link>
         </div>
-
+        </transition-group>
+      </div>
+      <p style="text-align: center; margin-top: 1em;">
+      <b-button v-if="search.length > 0 && limit < filteredList.length" @click="limit += 5">Show more</b-button>
+      </p>
     </b-container>
   </div>
 </template>
@@ -89,19 +88,20 @@ import reading from "../components/Reading";
 export default {
   name: "LetsRead",
   components: {
-    reading
+    reading,
   },
-  data: function() {
+  data: function () {
     return {
-      search: '',
+      search: "",
+      limit: 5,
       LPList: [],
-      reading: []
+      reading: [],
     };
   },
-  mounted: function() {
+  mounted: function () {
     document.title = "Awful Reader";
     var list = LPLIST;
-    list.sort(function(a, b) {
+    list.sort(function (a, b) {
       if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
       if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
 
@@ -126,34 +126,32 @@ export default {
       console.log(localItem);
       localStorage.readingList = JSON.stringify(localItem);
       this.reading.splice(index, 1);
-    }
+    },
   },
-   computed: {
+  computed: {
     filteredList() {
-      return this.LPList.filter(lp => {
-        return lp.t.toLowerCase().includes(this.search.toLowerCase())
-      })
-    }
-  }
+      return this.LPList.filter((lp) => {
+        return lp.t.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
+  },
 };
 </script>
 
 <style>
-
 .hero {
   min-height: 700px;
   padding-top: 15em;
   margin-bottom: 2em;
   background: #eef2f3;
   color: black;
-  background-image: url('../assets/garbageman.png');
+  background-image: url("../assets/garbageman.png");
   background-repeat: no-repeat;
   background-position-x: 40vw;
 }
 
-
 .hero h1 {
-  font-family: 'Crimson Text', serif;
+  font-family: "Crimson Text", serif;
   font-weight: 700;
   font-size: 500%;
 }
@@ -162,12 +160,10 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
 }
 
 .lp-listing {
   width: 210px;
-  
 }
 
 .lp-item {
@@ -189,9 +185,9 @@ export default {
 
 .lp-item:active {
   -webkit-box-shadow: none !important;
-box-shadow: none !important;
--webkit-transform: translateY(1px);
-transform: translateY(1px);
+  box-shadow: none !important;
+  -webkit-transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 .lp-author {
@@ -211,7 +207,6 @@ transform: translateY(1px);
   transition: all 0.2s ease;
   margin: 10px;
   display: inline-block;
-  
 }
 
 .readingItem:hover {
@@ -224,11 +219,10 @@ transform: translateY(1px);
 
 .readingItem:active .item {
   -webkit-box-shadow: none !important;
-box-shadow: none !important;
--webkit-transform: translateY(2px);
-transform: translateY(2px);
+  box-shadow: none !important;
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);
 }
-
 
 .readingItem h1 {
   font-size: 1.2em;
@@ -255,9 +249,6 @@ transform: translateY(2px);
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
 
-
-
-
 .list-enter, .list-leave-to
 /* .list-complete-leave-active below version 2.1.8 */ {
   opacity: 0;
@@ -276,6 +267,16 @@ transform: translateY(2px);
     width: 95% !important;
     margin: 1em;
   }
+}
 
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.list-move {
+  transition: all 1s;
 }
 </style>
