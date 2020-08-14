@@ -47,17 +47,18 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Inter:400,400i,500,600,600i,700,700i&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,500,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,500,600,600i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,400i,500,600,600i,700,700i&display=swap");
 @import url("https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css");
 /* https://coolors.co/fffcf2-ccc5b9-403d39-252422-eb5e28 */
 /* https://coolors.co/fcfeff-eef2f3-885a89-252422-6c89ff */
 
+
 #app {
-  font-family: "Inter", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   transition: all 1s ease-in-out;
-  font-size: 1em;
-  line-height: 1.7;
+  font-size: 1.1em;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
@@ -66,7 +67,7 @@ export default {
 
 .light {
   background: #FCFEFF;
-  color: #252422;
+  color: #586069;
   transition: all 1s ease-in-out;
 }
 
@@ -77,15 +78,13 @@ export default {
 }
 
 .dark a {
-  color: #6c89ff;
+  color: #d8dee9;
 }
 
-.light a {
-  color: #6c89ff;
-}
 
 .dark .lp-item{
   color: white;
+  background: #222835;
 }
 
 .dark .lp-author {
@@ -97,11 +96,8 @@ export default {
   color: #2e3440;
 }
 
-
-
 #nav {
   padding: 30px;
-  position: fixed;
   width: 100%;
 }
 
@@ -109,7 +105,7 @@ export default {
   font-size: 1.5em;
 }
 a {
-  color: #5e81ac;
+  color: #262730;
   font-weight: 700;
 }
 
@@ -133,9 +129,45 @@ img {
 
 /* Something Awful-specific CSS overrides */
 .bbc-block {
-  padding: 1em;
+  font-size: 0.9em;
+}
+
+.light .bbc-block {
+  padding: 2em;
   background: #eceff4;
-  border-radius: 3px;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.dark .bbc-block {
+  padding: 2em;
+  background: #434C5E;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.LPbutts {
+  background: #222835;
+  color: #eceff4;
+  border-radius: 30px;
+  border: 3px solid #222835;
+  padding: 1em;
+  min-width: 200px;
+  margin-bottom: 2em;
+}
+
+.LPbutts:hover {
+  background: #2E3440;
+  border: 3px solid #222835;
+}
+
+.LPbutts:focus {
+  border: none;
+}
+
+.LPbutts:active {
+    background: #2E3440;
+  border: 3px solid #222835;
 }
 
 

@@ -1,58 +1,29 @@
 <template>
   <div class="home">
-    <!-- <div class="hero">
+    <div class="hero">
 
     
     <b-container>
-      <h1>Reading Awful</h1>
-    <p>A minimal reader replacement for <a href="https://www.lparchive.org">LPArchive.org</a> <br/>with Let's Play's from the Something Awful forums.</p>
+      <h1>Let's Play <br> Archive</h1>
+    <p>A minimal reader replacement for <a href="https://www.lparchive.org" target="_blank">LPArchive.org</a> 
+    <br/>with Let's Play's from the Something Awful forums.</p>
     </b-container>
 
 
 
-    </div>-->
+    </div>
     <b-container>
-      <div v-if="reading.length > 0">
-        <p>
-          <strong>Currently Reading</strong>
-        </p>
-        <transition-group name="list" class="readContain" tag="div">
-          <div v-for="(red, index) in reading" :key="index" class="readingItem">
-            <p>
-              <router-link :to="red.part == 'Index' ? red.link :  red.link">
-                <reading
-                  :index="index"
-                  :title="red.title"
-                  :author="red.author"
-                  :part="red.part"
-                  :total="red.total"
-                  :image="red.image"
-                  :removeFunction="removeItem"
-                />
-              </router-link>
-            </p>
-          </div>
-        </transition-group>
-      </div>
-
-      <div v-else>
-        <p style="text-align: center;">
-          <i class="las la-surprise" style="font-size: 3em;"></i>
-          <br />Your reading list is empty! Get started by choosing an LP from below.
-          <br />
-          <br />
-          <i class="las la-hand-point-down" style="font-size: 2em;"></i>
-        </p>
-      </div>
-
+      <br><br>
       <div class="search-wrapper">
         <p style="text-align: center;">
-          <input type="text" v-model="search" placeholder="Search title.." />
+          <input type="text" v-model="search" placeholder="Find an LP" class="searchBar" />
         </p>
       </div>
 
+      <br><br>
      
-      <div class="">
+     
+      <div>
         <transition-group name="list" tag="div" class="lp-list">
         <div class="lp-listing" v-for="(lp, index) in filteredList" v-if="index < limit && search.length > 0" v-bind:key="index">
           <router-link :to="'lp' + lp.u">
@@ -67,14 +38,52 @@
                     v-bind:key="index"
                 >{{tag}}</b-badge>-->
               </div>
+              <div class="blocker">
+                </div>
             </div>
           </router-link>
         </div>
         </transition-group>
       </div>
-      <p style="text-align: center; margin-top: 1em;">
-      <b-button v-if="search.length > 0 && limit < filteredList.length" @click="limit += 5">Show more</b-button>
+      <p style="text-align: center; margin-top: 3em;">
+      <b-button v-if="search.length > 0 && limit < filteredList.length" @click="limit += 4" class="LPbutts">Show more</b-button>
       </p>
+
+
+
+       <div v-if="reading.length > 0">
+        <p>
+          <strong>Currently Reading</strong>
+        </p>
+        <transition-group name="list" class="readContain" tag="div">
+          <div v-for="(red, index) in reading" :key="index" class="readingItem">
+
+              <router-link :to="red.part == 'Index' ? red.link :  red.link">
+                <reading
+                  :index="index"
+                  :title="red.title"
+                  :author="red.author"
+                  :part="red.part"
+                  :total="red.total"
+                  :image="red.image"
+                  :removeFunction="removeItem"
+                />
+              </router-link>
+          </div>
+        </transition-group>
+      </div>
+
+      <div v-else>
+        <div v-if="search.length == 0">
+        <p style="text-align: center;">
+          <i class="las la-surprise" style="font-size: 3em;"></i>
+          <br />Your reading list is empty! Search for an LP above and start reading!
+          <br />
+        </p>
+        </div>
+      </div>
+
+    
     </b-container>
   </div>
 </template>
@@ -93,7 +102,7 @@ export default {
   data: function () {
     return {
       search: "",
-      limit: 5,
+      limit: 12,
       LPList: [],
       reading: [],
     };
@@ -131,7 +140,7 @@ export default {
   computed: {
     filteredList() {
       return this.LPList.filter((lp) => {
-        return lp.t.toLowerCase().includes(this.search.toLowerCase());
+        return lp.t.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").includes(this.search.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""));
       });
     },
   },
@@ -140,18 +149,27 @@ export default {
 
 <style>
 .hero {
-  min-height: 700px;
-  padding-top: 15em;
+  max-height: 700px;
+  padding-top: 8em;
+  padding-bottom: 5em;
   margin-bottom: 2em;
   background: #eef2f3;
   color: black;
-  background-image: url("../assets/garbageman.png");
-  background-repeat: no-repeat;
-  background-position-x: 40vw;
+  margin-top: -4em;
+  transition: all 1s ease-in-out;
+}
+
+.light .hero {
+  background: #eef2f3;
+}
+
+.dark .hero {
+  background: #222835;
+  color: #eef2f3;
 }
 
 .hero h1 {
-  font-family: "Crimson Text", serif;
+  font-family: "Work Sans", sans-serif;
   font-weight: 700;
   font-size: 500%;
 }
@@ -162,20 +180,18 @@ export default {
   flex-wrap: wrap;
 }
 
-.lp-listing {
-  width: 210px;
-}
+
 
 .lp-item {
-  border-radius: 5px;
-  height: 230px;
+  height: 250px;
+  width: 230px;
   color: #4c566a;
   margin: 1em;
   padding: 1em;
   font-weight: 600;
-  box-shadow: 0 4px 6px #32325d1c, 0 1px 3px #00000014;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  font-size: 0.8em;
 }
 
 .lp-item:hover {
@@ -200,24 +216,31 @@ export default {
 .readContain {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
 
 .readingItem {
   transition: all 0.2s ease;
   margin: 10px;
-  display: inline-block;
+  height: 200px !important;
+}
+
+.blocker {
+  height: 200px;
+    width: 230px;
+    margin-left: -1em;
+    background: #FCFEFF;
 }
 
 .readingItem:hover {
   transform: translateY(-2px);
 }
 
-.readingItem:hover .item {
+.readingItem:hover {
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
 
-.readingItem:active .item {
+.readingItem:active {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
   -webkit-transform: translateY(2px);
@@ -257,26 +280,79 @@ export default {
   position: absolute;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 770px) {
   .item {
     min-height: 0px;
     width: 100% !important;
+    height: 150px;
   }
 
   .readingItem {
     width: 95% !important;
+    height: 150px;
     margin: 1em;
+  }
+
+  .readItem {
+    height: 150px;
+  }
+
+  .item-content {
+    margin-top: -3em;
+    padding: 1em;
+  }
+
+  .lp-item {
+    width: 100% !important;
+    height: 120px;
+  }
+
+  .lp-listing{
+    width: 95% !important;
+    height: 120px;
+    margin-bottom: 1em;
   }
 }
 
-.list-enter-active, .list-leave-active {
-  transition: all 1s;
+/* .list-enter-active, .list-leave-active {
+  transition: opacity 1s;
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+.list-enter, .list-leave-to  {
   opacity: 0;
 }
 
 .list-move {
   transition: all 1s;
+} */
+
+.light .searchBar {
+      width: 80%;
+    height: 3em;
+    padding: 1em;
+    border: none;
+    background: #eef2f3;
+    border-radius: 12px;
+    color: #2E3440 !important;
+    transition: all 1s;
 }
+
+.dark .searchBar {
+  background: #222835;
+   width: 80%;
+    height: 3em;
+    padding: 1em;
+    border: none;
+    border-radius: 12px;
+    color: #eef2f3;
+    transition: all 1s;
+}
+
+.searchBar:focus {
+  outline: 0;
+}
+
+.searchBar::placeholder {
+  color: #2E3440;
+}
+
 </style>

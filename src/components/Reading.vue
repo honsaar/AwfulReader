@@ -1,99 +1,110 @@
 <template>
-<div class="item">
-     <div class="bg-img" v-bind:style="{ backgroundImage: 'url(' + image + ')'} ">
+  <div class="item">
+    <div
+      class="bg-img"
+      v-bind:style="{ backgroundImage: 'url(' + image + ')'} "
+      style="height: 160px;"
+    ></div>
     <div id="reading" class="readItem">
-        <p class="remover"><i class="las la-trash-alt" @click="removeItem"></i></p>
-            <div class="item-content">
-                 
-        <h1>{{title}}</h1>
-        <p class="author">{{author}}</p> 
-        <span class="parted" v-if="part != 'Index'"> {{part}}</span>
-        
-        </div>
-        </div>
+      <i
+        class="las la-times"
+        @click="removeItem"
+        style="float: right;
+    padding: 1em;"
+      ></i>
+      <div class="item-content">
+        <p>{{title}}</p>
+        <p class="author">{{author}}</p>
+        <span class="parted" v-if="part != 'Index'">{{part}}</span>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
 export default {
-props: ["index", "title", "author", "part", "total", "image","removeFunction"],
-methods:{
-    removeItem(e){
-        e.preventDefault();
-        console.log("Clicked in child");
-        this.removeFunction(this.title,this.index);
-    }
-},
-}
+  props: [
+    "index",
+    "title",
+    "author",
+    "part",
+    "total",
+    "image",
+    "removeFunction",
+  ],
+  methods: {
+    removeItem(e) {
+      e.preventDefault();
+      console.log("Clicked in child");
+      this.removeFunction(this.title, this.index);
+    },
+  },
+};
 </script>
 
 <style>
-
 .item {
-    border-radius: 5px;
-    /* box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014; */
-    -webkit-transition: all .5s ease;
-    transition: all .2s ease;
-    width: 200px;
-  max-height: 300px;
-  min-height: 170px;
-
+  border-radius: 5px;
+  /* box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014; */
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.2s ease;
+  width: 230px;
+  height: 100px;
+  margin: 0em;
 }
 
-
+.item:hover .bg-img {
+  opacity: 0.5;
+}
 
 .item-content {
-        padding: 2em;
-        opacity: 1 !important;
-        border-radius: 5px;
-        padding-top: 10%;
-        padding-bottom: 10%;
+  padding: 2em;
+  opacity: 1 !important;
+  padding-top: 20%;
+  padding-bottom: 10%;
+  font-size: 0.8em;
 }
 
 .bg-img {
-    background-size: auto;
-    border-radius: 5px;
-    background-position: 50%; 
+  background-size: auto;
+  background-position: 50%;
+  z-index: -1000;
+  transition: all 0.5s;
 }
 
-
-
-
-
 .dark .readItem {
-    background: rgba(59, 66, 82, 0.9);
-    color: #eceff4;
+  background: #2E3440;
+  color: #eceff4;
 }
 
 .light .readItem {
-    background: rgba(46, 52, 64, 0.9);
-    color: #eceff4;
+  background: #fcfeff;
+  color: rgba(34, 40, 53, 1);
 }
 
 .readItem {
-    border-radius: 5px;
-    min-height: 240px;
-    transition: all .5s ease;
+  height: 200px;
+  transition: all 0.5s ease;
+  width: 230px;
+  z-index: 10;
 }
 
 .author {
-    transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .light .author {
-    color: #c0c3c9;
+  color: #c0c3c9;
 }
 
 .dark .author {
-    color: #eceff4;
-    
+  color: #eceff4;
 }
 
 .parted {
-    font-size: 0.7em;
-    font-weight: 600;
-    text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .remover {
@@ -101,11 +112,10 @@ methods:{
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   color: #fff;
-  text-align:right;
+  text-align: right;
   padding-right: 0.3em;
-  padding-top:0;
+  padding-top: 0;
 }
-
 
 .remover i:hover {
   color: #4c566a;
