@@ -49,7 +49,6 @@ export default {
   -webkit-transition: all 0.5s ease;
   transition: all 0.2s ease;
   width: 230px;
-  height: 100px;
   margin: 0em;
 }
 
