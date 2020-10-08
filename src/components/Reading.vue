@@ -40,7 +40,10 @@ export default {
     },
   },
 };
+
 </script>
+
+
 
 <style>
 .item {
