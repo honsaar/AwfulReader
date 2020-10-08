@@ -2,12 +2,21 @@
   <div class="home">
     <div class="hero">
 
-    
+
     <b-container>
+      <b-row>
+        <b-col>
       <h1>Let's Play <br> Archive</h1>
     <p>A minimal reader replacement for <a href="https://www.lparchive.org" target="_blank">LPArchive.org</a> 
     <br/>with Let's Play's from the Something Awful forums.</p>
+        </b-col>
+        <b-col>
+<img src="@/assets/hero_1.svg" width="80%">
+        </b-col>
+      </b-row>
     </b-container>
+
+    
 
 
 
@@ -31,12 +40,12 @@
               <p>{{lp.t}}</p>
               <p class="lp-author">{{lp.a}}</p>
               <div class="tags">
-                <!-- <b-badge
+                <b-badge
                     pill
                     class="lp-tag"
                     v-for="(tag, index) in lp.tg"
                     v-bind:key="index"
-                >{{tag}}</b-badge>-->
+                >{{tag}}</b-badge>
               </div>
               <div class="blocker">
                 </div>
