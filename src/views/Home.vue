@@ -284,17 +284,15 @@ export default {
   .item {
     min-height: 0px;
     width: 100% !important;
-    height: 150px;
   }
 
   .readingItem {
     width: 95% !important;
-    height: 150px;
     margin: 1em;
   }
 
   .readItem {
-    height: 150px;
+
   }
 
   .item-content {
