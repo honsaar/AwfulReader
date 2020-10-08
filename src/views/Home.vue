@@ -222,7 +222,7 @@ export default {
 .readingItem {
   transition: all 0.2s ease;
   margin: 10px;
-  height: 200px !important;
+ 
 }
 
 .blocker {
