@@ -27,17 +27,22 @@ export default {
     }
   },
   mounted: function() {
-    console.log(this);
-    console.log("Route", this.$route);
+    // console.log(this);
+    // console.log("Route", this.$route);
     var lp = this.$route.params.name;
     var update = this.$route.params.update;
+    var updateImage;
+    
+    
+
+    
 
 
     //for future ID use
     var id = lp;
 
-    console.log(lp);
-    console.log(update);
+    // console.log(lp);
+    // console.log(update);
 
 
     var LPSrc = lp.replace(/\s+/g, '-');
@@ -93,6 +98,12 @@ export default {
 
         //fix name to remove any dashes in the LP url
         lp = lp.replace(/-/g, ' ');
+
+        setTimeout(function(){
+          console.log("Get Image!");
+          console.log(document.getElementsByTagName('img')[0].src);
+          updateImage = document.getElementsByTagName('img')[0].src;
+    
  
         if(localStorage.readingList){
         var readingList = JSON.parse(localStorage.readingList);
@@ -130,9 +141,13 @@ export default {
           //get the second element in the array, it's the same for new LPs and existing ones
 
 
-
+ 
           if(compID[2] == id){
             console.log("exists");
+
+            
+                
+
             //if the lp exists
             if(element.part != undefined){
               if(element.author == undefined){
@@ -143,6 +158,9 @@ export default {
               if (element.part != update){
                 element.part = update;
                 element.link = vueInstance.$route.path;
+               
+                element.image = updateImage;
+                console.log("Updating image! " + element.image);
                 //new update, move this to the top of the list
                 readingList.splice(i, 1);
                 readingList.unshift(element);
@@ -154,7 +172,10 @@ export default {
               found = true;
               break;
             }
+
           }
+  
+        
 
           //end comparison
         }
@@ -175,16 +196,16 @@ export default {
                 console.log("returned", savedTitle[0]);
               var saveTitle = savedTitle[0].t;
             }
-            readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path});
+            readingList.unshift({"title": saveTitle, "author":author, "part": update, "total":upNum, "link":vueInstance.$route.path, "image": updateImage});
           
         }
         
         //send it to LocalStorage
         localStorage.readingList = JSON.stringify(readingList);
     
-        
+         }, 1000);
   });
-
+      
   }
 }
 </script>

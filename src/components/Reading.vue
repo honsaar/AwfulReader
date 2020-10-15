@@ -68,7 +68,7 @@ export default {
 }
 
 .bg-img {
-  background-size: auto;
+  background-size: cover;
   background-position: 50%;
   z-index: -1000;
   transition: all 0.5s;
