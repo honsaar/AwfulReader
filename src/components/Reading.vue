@@ -2,7 +2,7 @@
   <div class="item">
     <div
       class="bg-img"
-      v-bind:style="{ backgroundImage: 'url(' + image + ')'} "
+      v-bind:style="{ backgroundImage: 'url(\'' + image + '\')'} "
       style="height: 160px;"
     ></div>
     <div id="reading" class="readItem">
