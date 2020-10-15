@@ -2,7 +2,7 @@
   <div class="item">
     <div
       class="bg-img"
-      v-bind:style="{ backgroundImage: 'url(' + image + ')'} "
+      v-bind:style="{ backgroundImage: 'url(\'' + image + '\')'} "
       style="height: 160px;"
     ></div>
     <div id="reading" class="readItem">
@@ -68,7 +68,7 @@ export default {
 }
 
 .bg-img {
-  background-size: auto;
+  background-size: cover;
   background-position: 50%;
   z-index: -1000;
   transition: all 0.5s;

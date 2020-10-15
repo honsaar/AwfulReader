@@ -47,8 +47,8 @@
                     v-bind:key="index"
                 >{{tag}}</b-badge>
               </div>
-              <div class="blocker">
-                </div>
+              <!-- <div class="blocker">
+                </div> -->
             </div>
           </router-link>
         </div>
