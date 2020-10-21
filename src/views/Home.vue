@@ -294,17 +294,21 @@ export default {
   }
 
   .readingItem {
-    width: 95% !important;
+    width: 95%;
     margin: 1em;
   }
 
   .readItem {
+    width: 100%;
+  }
 
+  .bg-img {
+    z-index: -1;
   }
 
   .item-content {
-    margin-top: -3em;
     padding: 1em;
+    z-index: 1;
   }
 
   .lp-item {
