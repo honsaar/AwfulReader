@@ -1,5 +1,5 @@
 {
-  "name": "letsreader",
+  "name": "awfulreader",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -31,5 +31,17 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "description": "<p align=\"center\"><img width=\"40\" height=\"40\" src=\"frog.png\"></p>",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honsaar/AwfulReader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/honsaar/AwfulReader/issues"
+  },
+  "homepage": "https://github.com/honsaar/AwfulReader#readme"
 }

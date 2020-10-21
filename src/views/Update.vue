@@ -80,7 +80,7 @@ export default {
           if(element.className == "return"){
             element.outerHTML = "<a class='return' href='../'>" + element.innerText + "</a>";
           } else {
-          element.outerHTML = "<router-link class='" + element.className + "' to='" + element.pathname + "'>" + element.innerText + "</router-link>";
+            element.outerHTML = "<router-link class='" + element.className + "' to='" + element.pathname + "'>" + element.innerText + "</router-link>";
           }
         });
 
