@@ -66,18 +66,16 @@
         </p>
         <transition-group name="list" class="readContain" tag="div">
           <div v-for="(red, index) in reading" :key="index" class="readingItem">
-
-              <router-link :to="red.part == 'Index' ? red.link :  red.link">
-                <reading
-                  :index="index"
-                  :title="red.title"
-                  :author="red.author"
-                  :part="red.part"
-                  :total="red.total"
-                  :image="red.image"
-                  :removeFunction="removeItem"
-                />
-              </router-link>
+            <reading
+              :index="index"
+              :title="red.title"
+              :author="red.author"
+              :part="red.part"
+              :total="red.total"
+              :image="red.image"
+              :removeFunction="removeItem"
+              :link="red.link"
+            />
           </div>
         </transition-group>
       </div>
@@ -134,7 +132,7 @@ export default {
   },
   methods: {
     removeItem(title, index) {
-      console.log("AAA");
+      console.log("AAAAA");
       console.log("remove " + title + " from list at index " + index);
       console.log(this.reading[index]);
       console.log(this.reading);

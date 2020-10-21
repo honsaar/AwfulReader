@@ -1,10 +1,12 @@
 <template>
   <div class="item">
-    <div
-      class="bg-img"
-      v-bind:style="{ backgroundImage: 'url(\'' + image + '\')'} "
-      style="height: 160px;"
-    ></div>
+    <router-link :to="link">
+      <div
+        class="bg-img"
+        v-bind:style="{ backgroundImage: 'url(\'' + image + '\')'} "
+        style="height: 160px;"
+      ></div>
+    </router-link>
     <div id="reading" class="readItem">
       <i
         class="las la-times"
@@ -13,7 +15,9 @@
     padding: 1em;"
       ></i>
       <div class="item-content">
-        <p>{{title}}</p>
+        <router-link :to="link">
+          <p>{{title}}</p>
+        </router-link>
         <p class="author">{{author}}</p>
         <span class="parted" v-if="part != 'Index'">{{part}}</span>
       </div>
@@ -31,6 +35,7 @@ export default {
     "total",
     "image",
     "removeFunction",
+    "link",
   ],
   methods: {
     removeItem(e) {
