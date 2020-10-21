@@ -157,13 +157,16 @@ export default {
 <style>
 .hero {
   max-height: 700px;
-  padding-top: 8em;
   padding-bottom: 5em;
   margin-bottom: 2em;
   background: #eef2f3;
   color: black;
-  margin-top: -4em;
   transition: all 1s ease-in-out;
+}
+
+.col {
+  position: static;
+  margin-top: 2em;
 }
 
 .light .hero {
@@ -186,8 +189,6 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-
-
 
 .lp-item {
   height: 250px;
@@ -234,9 +235,9 @@ export default {
 
 .blocker {
   height: 200px;
-    width: 230px;
-    margin-left: -1em;
-    background: #FCFEFF;
+  width: 230px;
+  margin-left: -1em;
+  background: #FCFEFF;
 }
 
 .readingItem:hover {

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/" style="float:left;"><i class="las la-frog"></i></router-link>
-      <a style="float: right;" @click="changeMode()"><i class="las la-moon"></i></a>
+      <router-link to="/"><i class="las la-frog"></i></router-link>
+      <a @click="changeMode()"><i class="las la-moon"></i></a>
     </div>
     <router-view  :class="[darkMode == 'true' ? 'dark' : 'light']" :key="$route.fullPath"></router-view>
   </div>
@@ -97,13 +97,18 @@ export default {
 }
 
 #nav {
-  padding: 30px;
   width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgb(34, 40, 66);
+  display: block;
 }
 
 #nav i {
   font-size: 1.5em;
 }
+
 a {
   color: #262730;
   font-weight: 700;
@@ -170,5 +175,20 @@ img {
   border: 3px solid #222835;
 }
 
+.la-moon {
+  position: relative;
+  float: right;
+  top: 3%;
+  right: 5%;
+  color: #d8dee9;
+}
+
+.la-frog {
+  position: relative;
+  float: left;
+  top: 3%;
+  left: 5%;
+  color: #d8dee9;
+}
 
 </style>
