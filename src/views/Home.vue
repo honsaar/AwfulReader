@@ -167,6 +167,12 @@ export default {
 .col {
   position: static;
   margin-top: 2em;
+  padding: 0;
+  margin-left: 1em;
+}
+
+.row {
+  flex-wrap: nowrap;
 }
 
 .light .hero {
