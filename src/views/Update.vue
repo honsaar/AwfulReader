@@ -231,6 +231,10 @@ export default {
   margin-bottom: 2em;
 }
 
+#content {
+  margin-top: 5em;
+}
+
 .fulfilling-square-spinner , .fulfilling-square-spinner * {
         box-sizing: border-box;
       }
