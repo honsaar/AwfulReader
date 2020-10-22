@@ -81,7 +81,6 @@ export default {
   color: #d8dee9;
 }
 
-
 .dark .lp-item{
   color: white;
   background: #222835;
@@ -101,12 +100,11 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgb(34, 40, 66);
   display: block;
 }
 
 #nav i {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 a {
@@ -171,7 +169,7 @@ img {
 }
 
 .LPbutts:active {
-    background: #2E3440;
+  background: #2E3440;
   border: 3px solid #222835;
 }
 
@@ -180,7 +178,6 @@ img {
   float: right;
   top: 3%;
   right: 5%;
-  color: #d8dee9;
 }
 
 .la-frog {
@@ -188,7 +185,6 @@ img {
   float: left;
   top: 3%;
   left: 5%;
-  color: #d8dee9;
 }
 
 </style>
