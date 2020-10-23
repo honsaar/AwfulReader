@@ -5,22 +5,27 @@
 
     <b-container>
       <b-row>
-        <b-col>
+        <b-col sm="6" order="1" order-sm="0">
       <h1>Let's Play <br> Archive</h1>
     <p>A minimal reader replacement for <a href="https://www.lparchive.org" target="_blank">LPArchive.org</a> 
     <br/>with Let's Play's from the Something Awful forums.</p>
         </b-col>
-        <b-col>
-<img src="@/assets/hero_1.svg" width="80%">
+        <b-col sm="6" order="0" order-sm="1"> 
+<img src="@/assets/hero_1.svg" width="80%" style="max-width: 400px;">
         </b-col>
       </b-row>
     </b-container>
 
     
 
+    
+
 
 
     </div>
+
+
+
     <b-container>
       <br><br>
       <div class="search-wrapper">
@@ -124,7 +129,7 @@ export default {
       return 0;
     });
     this.LPList = list;
-    console.log(list);
+    // console.log(list);
     //get reading list
     if (localStorage.readingList) {
       this.reading = JSON.parse(localStorage.readingList);
@@ -132,14 +137,14 @@ export default {
   },
   methods: {
     removeItem(title, index) {
-      console.log("AAAAA");
-      console.log("remove " + title + " from list at index " + index);
-      console.log(this.reading[index]);
-      console.log(this.reading);
+      // console.log("AAAAA");
+      // console.log("remove " + title + " from list at index " + index);
+      // console.log(this.reading[index]);
+      // console.log(this.reading);
 
       var localItem = JSON.parse(localStorage.readingList);
       localItem.splice(index, 1);
-      console.log(localItem);
+      // console.log(localItem);
       localStorage.readingList = JSON.stringify(localItem);
       this.reading.splice(index, 1);
     },
@@ -156,8 +161,8 @@ export default {
 
 <style>
 .hero {
-  max-height: 700px;
-  padding-bottom: 5em;
+  padding-bottom: 2em;
+  padding-top: 5em;
   margin-bottom: 2em;
   background: #eef2f3;
   color: black;
@@ -171,9 +176,9 @@ export default {
   margin-left: 1em;
 }
 
-.row {
+/* .row {
   flex-wrap: nowrap;
-}
+} */
 
 .light .hero {
   background: #eef2f3;
