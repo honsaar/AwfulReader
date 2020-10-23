@@ -208,9 +208,8 @@ export default {
   margin: 1em;
   padding: 1em;
   font-weight: 600;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
   font-size: 0.8em;
+    transition: transform 0.2s ease, background 1s ease-in-out, box-shadow 0.2s ease;
 }
 
 .lp-item:hover {
