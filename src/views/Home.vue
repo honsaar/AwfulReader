@@ -230,6 +230,7 @@ export default {
   font-size: 1em;
   margin-top: -1em;
   font-weight: 400;
+  transition: all 1s ease-in-out;
 }
 
 .readContain {
@@ -273,6 +274,7 @@ export default {
   background: #eceff4 !important;
   color: #b0b7c5;
   margin-right: 6px;
+  transition: all 1s ease-in-out;
 }
 
 .show-list {
@@ -353,7 +355,7 @@ export default {
     background: #eef2f3;
     border-radius: 12px;
     color: #2E3440 !important;
-    transition: all 1s;
+     transition: all 1s ease-in-out;
 }
 
 .dark .searchBar {
@@ -364,7 +366,7 @@ export default {
     border: none;
     border-radius: 12px;
     color: #eef2f3;
-    transition: all 1s;
+    transition: all 1s ease-in-out;
 }
 
 .searchBar:focus {

@@ -71,6 +71,11 @@ export default {
   transition: all 1s ease-in-out;
 }
 
+.light .lp-item {
+  background: #f8fcfd;
+  transition: all 1s ease-in-out;
+}
+
 .dark {
   background: #2E3440;
   color: #FCFEFF;
@@ -81,9 +86,14 @@ export default {
   color: #d8dee9;
 }
 
+a { 
+   transition: all 1s ease-in-out;
+}
+
 .dark .lp-item{
   color: white;
   background: #222835;
+  transition: all 1s ease-in-out;
 }
 
 .dark .lp-author {
@@ -93,6 +103,7 @@ export default {
 .dark .lp-tag {
   background: #4c566a !important;
   color: #2e3440;
+  transition: all 1s ease-in-out;
 }
 
 #nav {
