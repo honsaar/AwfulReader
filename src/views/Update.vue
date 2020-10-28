@@ -106,7 +106,7 @@ export default {
           for (var i = 0; i < images.length; i++) {
             var img = images[i];
             
-            if (img.width >= 400 && img.height >= 200) {
+            if (img.height >= 100) {
               console.log("Found suitably large image, setting as update image: " + img.src);
               updateImage = img.src;
               break;
