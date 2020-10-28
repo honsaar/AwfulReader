@@ -100,10 +100,22 @@ export default {
         lp = lp.replace(/-/g, ' ');
 
         setTimeout(function(){
-          console.log("Get Image!");
-          console.log(document.getElementsByTagName('img')[0].src);
-          updateImage = document.getElementsByTagName('img')[0].src;
-    
+          
+          // Find the first suitably large image (at least 400x200) to use as the update image
+          var images = document.getElementsByTagName('img');
+          for (var i = 0; i < images.length; i++) {
+            var img = images[i];
+            
+            if (img.width >= 400 && img.height >= 200) {
+              console.log("Found suitably large image, setting as update image: " + img.src);
+              updateImage = img.src;
+              break;
+            }
+          }
+
+          if (updateImage == null) {
+            console.log("No suitable image found for update");
+          }
  
         if(localStorage.readingList){
         var readingList = JSON.parse(localStorage.readingList);
