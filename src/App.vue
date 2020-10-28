@@ -73,7 +73,7 @@ export default {
 
 .light .lp-item {
   background: #f8fcfd;
-  transition: all 1s ease-in-out;
+
 }
 
 .dark {
@@ -93,7 +93,6 @@ a {
 .dark .lp-item{
   color: white;
   background: #222835;
-  transition: all 1s ease-in-out;
 }
 
 .dark .lp-author {
