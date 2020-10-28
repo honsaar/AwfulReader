@@ -1,4 +1,4 @@
-<p align="center"><img width="40" height="40" src="frog.png"></p>
+<p align="center"><img width="40" height="40" src="froge.png"></p>
 
 # Awful Reads
 Reader for Lparchive.org (unofficial)
