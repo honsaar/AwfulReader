@@ -121,7 +121,17 @@ export default {
   },
   mounted: function () {
     document.title = "Awful Reader";
-    var list = LPLIST;
+    var list = axios.get("https://cors-anywhere.herokuapp.com/https://www.lparchive.org").then(response => {
+        
+        var str = response.data;
+        var n = str.search('tocdata=');
+        var sliced = str.slice(n);
+        sliced = sliced.replace('tocdata=', '');
+        sliced = sliced.replace('serverState = { type: SEARCH_TITLE, sort: SORT_ALPHA, search: "", tags: [] };var imageLookup = [\'type-text\', \'type-screenshot\', \'type-video\', \'type-hybrid\'];var textLookup = [\'Text\',\'Screenshot\',\'Video\',\'Hybrid\'];', '');
+        sliced = sliced.replace('</script></body>', '');
+        sliced = sliced.replace('</html>','');
+        console.log(sliced);
+});
     list.sort(function (a, b) {
       if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
       if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
