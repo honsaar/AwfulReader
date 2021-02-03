@@ -1,71 +1,85 @@
 <template>
   <div class="home">
     <div class="hero">
-
-
-    <b-container>
-      <b-row>
-        <b-col sm="6" order="1" order-sm="0">
-      <h1>Let's Play <br> Archive</h1>
-    <p>A minimal reader replacement for <a href="https://www.lparchive.org" target="_blank">LPArchive.org</a> 
-    <br/>with Let's Play's from the Something Awful forums.</p>
-        </b-col>
-        <b-col sm="6" order="0" order-sm="1"> 
-<img src="@/assets/hero_1.svg" width="80%" style="max-width: 400px;">
-        </b-col>
-      </b-row>
-    </b-container>
-
-    
-
-    
-
-
-
+      <b-container>
+        <b-row>
+          <b-col sm="6" order="1" order-sm="0">
+            <h1>
+              Let's Play <br />
+              Archive
+            </h1>
+            <p>
+              A minimal reader replacement for
+              <a href="https://www.lparchive.org" target="_blank"
+                >LPArchive.org</a
+              >
+              <br />with Let's Play's from the Something Awful forums.
+            </p>
+          </b-col>
+          <b-col sm="6" order="0" order-sm="1">
+            <img
+              src="@/assets/hero_1.svg"
+              width="80%"
+              style="max-width: 400px"
+            />
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
 
-
-
     <b-container>
-      <br><br>
+      <br /><br />
       <div class="search-wrapper">
-        <p style="text-align: center;">
-          <input type="text" v-model="search" placeholder="Find an LP" class="searchBar" />
+        <p style="text-align: center">
+          <input
+            type="text"
+            v-model="search"
+            placeholder="Find an LP"
+            class="searchBar"
+          />
         </p>
       </div>
 
-      <br><br>
-     
-     
+      <br /><br />
+
       <div>
         <transition-group name="list" tag="div" class="lp-list">
-        <div class="lp-listing" v-for="(lp, index) in filteredList" v-if="index < limit && search.length > 0" v-bind:key="index">
-          <router-link :to="'lp' + lp.u">
-            <div class="lp-item">
-              <p>{{lp.t}}</p>
-              <p class="lp-author">{{lp.a}}</p>
-              <div class="tags">
-                <b-badge
+          <div
+            class="lp-listing"
+            v-for="(lp, index) in filteredList"
+            v-if="index < limit && search.length > 0"
+            v-bind:key="index"
+          >
+            <router-link :to="'lp' + lp.u">
+              <div class="lp-item">
+                <p>{{ lp.t }}</p>
+                <p class="lp-author">{{ lp.a }}</p>
+                <div class="tags">
+                  <b-badge
                     pill
                     class="lp-tag"
                     v-for="(tag, index) in lp.tg"
                     v-bind:key="index"
-                >{{tag}}</b-badge>
-              </div>
-              <!-- <div class="blocker">
+                    >{{ tag }}</b-badge
+                  >
+                </div>
+                <!-- <div class="blocker">
                 </div> -->
-            </div>
-          </router-link>
-        </div>
+              </div>
+            </router-link>
+          </div>
         </transition-group>
       </div>
-      <p style="text-align: center; margin-top: 3em;">
-      <b-button v-if="search.length > 0 && limit < filteredList.length" @click="limit += 4" class="LPbutts">Show more</b-button>
+      <p style="text-align: center; margin-top: 3em">
+        <b-button
+          v-if="search.length > 0 && limit < filteredList.length"
+          @click="limit += 4"
+          class="LPbutts"
+          >Show more</b-button
+        >
       </p>
 
-
-
-       <div v-if="reading.length > 0">
+      <div v-if="reading.length > 0">
         <p>
           <strong>Currently Reading</strong>
         </p>
@@ -87,15 +101,14 @@
 
       <div v-else>
         <div v-if="search.length == 0">
-        <p style="text-align: center;">
-          <i class="las la-surprise" style="font-size: 3em;"></i>
-          <br />Your reading list is empty! Search for an LP above and start reading!
-          <br />
-        </p>
+          <p style="text-align: center">
+            <i class="las la-surprise" style="font-size: 3em"></i>
+            <br />Your reading list is empty! Search for an LP above and start
+            reading!
+            <br />
+          </p>
         </div>
       </div>
-
-    
     </b-container>
   </div>
 </template>
@@ -121,7 +134,7 @@ export default {
   },
   mounted: function () {
     document.title = "Awful Reader";
-    var list = axios.get("https://cors-anywhere.herokuapp.com/https://www.lparchive.org").then(response => {
+    axios.get("https://cors-anywhere.herokuapp.com/https://www.lparchive.org").then(response => {
         
         var str = response.data;
         var n = str.search('tocdata=');
@@ -130,8 +143,8 @@ export default {
         sliced = sliced.replace('serverState = { type: SEARCH_TITLE, sort: SORT_ALPHA, search: "", tags: [] };var imageLookup = [\'type-text\', \'type-screenshot\', \'type-video\', \'type-hybrid\'];var textLookup = [\'Text\',\'Screenshot\',\'Video\',\'Hybrid\'];', '');
         sliced = sliced.replace('</script></body>', '');
         sliced = sliced.replace('</html>','');
-        console.log(sliced);
 });
+    var list = sliced;
     list.sort(function (a, b) {
       if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
       if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
@@ -219,7 +232,8 @@ export default {
   padding: 1em;
   font-weight: 600;
   font-size: 0.8em;
-    transition: transform 0.2s ease, background 1s ease-in-out, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, background 1s ease-in-out,
+    box-shadow 0.2s ease;
 }
 
 .lp-item:hover {
@@ -257,7 +271,7 @@ export default {
   height: 200px;
   width: 230px;
   margin-left: -1em;
-  background: #FCFEFF;
+  background: #fcfeff;
 }
 
 .readingItem:hover {
@@ -338,7 +352,7 @@ export default {
     height: 120px;
   }
 
-  .lp-listing{
+  .lp-listing {
     width: 95% !important;
     height: 120px;
     margin-bottom: 1em;
@@ -357,25 +371,25 @@ export default {
 } */
 
 .light .searchBar {
-      width: 80%;
-    height: 3em;
-    padding: 1em;
-    border: none;
-    background: #eef2f3;
-    border-radius: 12px;
-    color: #2E3440 !important;
-     transition: all 1s ease-in-out;
+  width: 80%;
+  height: 3em;
+  padding: 1em;
+  border: none;
+  background: #eef2f3;
+  border-radius: 12px;
+  color: #2e3440 !important;
+  transition: all 1s ease-in-out;
 }
 
 .dark .searchBar {
   background: #222835;
-   width: 80%;
-    height: 3em;
-    padding: 1em;
-    border: none;
-    border-radius: 12px;
-    color: #eef2f3;
-    transition: all 1s ease-in-out;
+  width: 80%;
+  height: 3em;
+  padding: 1em;
+  border: none;
+  border-radius: 12px;
+  color: #eef2f3;
+  transition: all 1s ease-in-out;
 }
 
 .searchBar:focus {
@@ -383,7 +397,6 @@ export default {
 }
 
 .searchBar::placeholder {
-  color: #2E3440;
+  color: #2e3440;
 }
-
 </style>
