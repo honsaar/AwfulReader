@@ -219,7 +219,7 @@ export default {
 }
 
 .hero h1 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 500%;
 }
