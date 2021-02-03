@@ -139,7 +139,7 @@ export default {
       return 0;
     });
     this.LPList = list;
-    // console.log(list);
+     console.log(list);
     //get reading list
     if (localStorage.readingList) {
       this.reading = JSON.parse(localStorage.readingList);
