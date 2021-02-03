@@ -140,9 +140,10 @@ export default {
         var n = str.search('tocdata=');
         var sliced = str.slice(n);
         sliced = sliced.replace('tocdata=', '');
+        sliced = sliced.replace('<\/script><\/body>', '');
+        sliced = sliced.replace('<\/html>','');
         sliced = sliced.replace('serverState = { type: SEARCH_TITLE, sort: SORT_ALPHA, search: "", tags: [] };var imageLookup = [\'type-text\', \'type-screenshot\', \'type-video\', \'type-hybrid\'];var textLookup = [\'Text\',\'Screenshot\',\'Video\',\'Hybrid\'];', '');
-        sliced = sliced.replace('</script></body>', '');
-        sliced = sliced.replace('</html>','');
+       
 });
     var list = sliced;
     list.sort(function (a, b) {
