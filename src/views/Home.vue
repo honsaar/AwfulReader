@@ -134,6 +134,7 @@ export default {
   },
   mounted: function () {
     document.title = "Awful Reader";
+
     axios.get("https://cors-anywhere.herokuapp.com/https://www.lparchive.org").then(response => {
         
         var str = response.data;
@@ -144,20 +145,24 @@ export default {
         sliced = sliced.replace('<\/html>','');
         sliced = sliced.replace('serverState = { type: SEARCH_TITLE, sort: SORT_ALPHA, search: "", tags: [] };var imageLookup = [\'type-text\', \'type-screenshot\', \'type-video\', \'type-hybrid\'];var textLookup = [\'Text\',\'Screenshot\',\'Video\',\'Hybrid\'];', '');
        
-});
-    var list = sliced;
-    list.sort(function (a, b) {
-      if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
-      if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
+        sliced = sliced.replace(/'/g, '"');
+        sliced = sliced.replace(/;/g, '');
 
-      return 0;
+        var list = JSON.parse(sliced);
+
+        list.sort(function (a, b) {
+          if (a.t.toLowerCase() < b.t.toLowerCase()) return -1;
+          if (a.t.toLowerCase() > b.t.toLowerCase()) return 1;
+
+          return 0;
+        });
+        this.LPList = list;
+        console.log(list);
+        //get reading list
+        if (localStorage.readingList) {
+          this.reading = JSON.parse(localStorage.readingList);
+        }
     });
-    this.LPList = list;
-     console.log(list);
-    //get reading list
-    if (localStorage.readingList) {
-      this.reading = JSON.parse(localStorage.readingList);
-    }
   },
   methods: {
     removeItem(title, index) {
