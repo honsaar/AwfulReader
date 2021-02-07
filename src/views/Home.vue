@@ -135,7 +135,7 @@ export default {
   mounted: function () {
     document.title = "Awful Reader";
 
-    axios.get("https://thingproxy.freeboard.io/fetch/https://www.lparchive.org").then(response => {
+    axios.get("https://cors-container.herokuapp.com/https://www.lparchive.org").then(response => {
         
         var str = response.data;
         var n = str.search('tocdata=');
