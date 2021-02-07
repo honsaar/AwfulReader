@@ -53,7 +53,7 @@ export default {
 
     var testing = axios
       .get(
-        "https://cors-container.herokuapp.com/" + LPSrc + "/" + UpdateSrc + "/"
+       remoteURL
       )
       .then(function(e) {
         var dataDom = e.data;
