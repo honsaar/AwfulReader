@@ -47,13 +47,13 @@ export default {
 
     var LPSrc = lp.replace(/\s+/g, '-');
     var UpdateSrc = update.replace(/\s+/g, '%20');
-    var remoteURL = "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/";
+    var remoteURL = "https://cors-container.herokuapp.com/https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/";
     var vueInstance = this;
     this.dom = '';
 
     var testing = axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/" + UpdateSrc + "/"
+        "https://cors-container.herokuapp.com/" + LPSrc + "/" + UpdateSrc + "/"
       )
       .then(function(e) {
         var dataDom = e.data;
