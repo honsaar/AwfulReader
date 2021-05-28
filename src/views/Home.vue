@@ -27,7 +27,7 @@
       </b-container>
     </div>
 
-    <b-container>
+    <b-container style="max-width: 1440px">
       <br /><br />
       <div class="search-wrapper">
         <p style="text-align: center">
@@ -116,7 +116,7 @@
 <script>
 // @ is an alias to /src
 
-import LPLIST from "../assets/tocdata.json";
+// import LPLIST from "../assets/tocdata.json";
 import reading from "../components/Reading";
 
 export default {
@@ -134,8 +134,15 @@ export default {
   },
   mounted: function () {
     document.title = "Awful Reader";
+    this.getTOC();
+    this.getLatestLPs();
 
-    axios.get("https://cors-container.herokuapp.com/https://www.lparchive.org").then(response => {
+    
+  },
+  methods: {
+
+    getTOC(){
+      axios.get("https://cors-container.herokuapp.com/https://www.lparchive.org").then(response => {
         
         var str = response.data;
         var n = str.search('tocdata=');
@@ -163,8 +170,10 @@ export default {
           this.reading = JSON.parse(localStorage.readingList);
         }
     });
-  },
-  methods: {
+    },
+    getLatestLPs(){
+      console.log("Getting LPs I guess");
+    },
     removeItem(title, index) {
       // console.log("AAAAA");
       // console.log("remove " + title + " from list at index " + index);
@@ -228,30 +237,32 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .lp-item {
   height: 250px;
-  width: 230px;
+  width: 370px;
   color: #4c566a;
-  margin: 1em;
+  margin: 1.5em;
   padding: 1em;
   font-weight: 600;
   font-size: 0.8em;
-  transition: transform 0.2s ease, background 1s ease-in-out,
-    box-shadow 0.2s ease;
+  transition: background 1s ease-in-out,
+    box-shadow 0.5s ease;
+    border-radius: 8px;
 }
 
 .lp-item:hover {
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); */
   box-shadow: 0 15px 15px #32325d33, 0 5px 10px #0000001a !important;
 }
 
 .lp-item:active {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  -webkit-transform: translateY(1px);
-  transform: translateY(1px);
+  /* -webkit-transform: translateY(1px); */
+  /* transform: translateY(1px); */
 }
 
 .lp-author {
@@ -265,12 +276,13 @@ export default {
 .readContain {
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
 }
 
 .readingItem {
-  transition: all 0.2s ease;
-  margin: 10px;
+  transition: all .5s ease;
+  margin: 1.5em;
+  border-radius: 8px;
 }
 
 .blocker {
@@ -281,7 +293,7 @@ export default {
 }
 
 .readingItem:hover {
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); */
 }
 
 .readingItem:hover {
@@ -359,9 +371,7 @@ export default {
   }
 
   .lp-listing {
-    width: 95% !important;
-    height: 120px;
-    margin-bottom: 1em;
+    margin: 1.5em;
   }
 }
 

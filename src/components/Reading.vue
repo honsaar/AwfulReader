@@ -4,7 +4,7 @@
       <div
         class="bg-img"
         v-bind:style="{ backgroundImage: 'url(\'' + image + '\')'} "
-        style="height: 160px;"
+        style="height: 250px;"
       ></div>
     </router-link>
     <div id="reading" class="readItem">
@@ -52,22 +52,21 @@ export default {
 
 <style>
 .item {
-  border-radius: 5px;
   /* box-shadow: 0 4px 6px #32325d1c,0 1px 3px #00000014; */
   -webkit-transition: all 0.5s ease;
-  transition: all 0.2s ease;
-  width: 230px;
+  transition: all 1s ease;
+  width: 370px;
   margin: 0em;
 }
 
 .item:hover .bg-img {
-  opacity: 0.5;
+  /* opacity: 0.5; */
+  border-radius: 8px 8px 0 0;
 }
 
 .item-content {
   padding: 2em;
   opacity: 1 !important;
-  padding-top: 20%;
   padding-bottom: 10%;
   font-size: 0.8em;
 }
@@ -76,7 +75,9 @@ export default {
   background-size: cover;
   background-position: 50%;
   z-index: -1000;
-  transition: all 0.5s;
+  transition: all 1s;
+  border-radius: 8px;
+  background-color: #eef2f3;
 }
 
 .dark .readItem {
@@ -91,13 +92,13 @@ export default {
 
 .readItem {
   height: 200px;
-  transition: all 0.5s ease;
-  width: 230px;
+  transition: all 1s ease;
   z-index: 10;
+  border-radius: 8px;
 }
 
 .author {
-  transition: all 0.5s ease;
+  transition: all 1s ease;
 }
 
 .light .author {
