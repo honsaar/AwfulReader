@@ -32,7 +32,7 @@ export default {
     var vueInstance = this;
     var testing = axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://lparchive.org/" + LPSrc + "/"
+        "https://cors-container.herokuapp.com/https://lparchive.org/" + LPSrc + "/"
       )
       .then(function(e) {
         var dataDom = e.data;
